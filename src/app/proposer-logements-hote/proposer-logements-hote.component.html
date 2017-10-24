@@ -1,0 +1,33 @@
+<app-espace-hote></app-espace-hote>
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Proposer nouveau logement</div>
+    <div class="panel-body">
+      <div class="form-group">
+          <label class="control-label">Adresse:</label>
+          <input class="form-control" type="text" [(ngModel)]="newLogement.adresse"/>
+      </div>
+      <div class="form-group">
+          <label class="control-label">Prix:</label>
+          <input class="form-control" type="text" [(ngModel)]="newLogement.Prix"/>
+      </div>    
+      
+      <div class="form-group">
+          <label class="control-label">Date de disponibilité:</label>
+          <input class="form-control" type="date" [(ngModel)]="newLogement.DateDisponibilite"/>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Photo:</label>
+        <input class="form-control" type="" [(ngModel)]="newLogement.photo"/>
+        <br>
+        <button class="btn btn-primary" > Télécharger </button>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Description:</label>
+      <br>
+      <textarea rows="4" cols="80" [(ngModel)]="newLogement.description"></textarea>
+  </div>
+      <button class="btn btn-primary" (click)= "saveLogement()" > Enregistrer </button>  
+    </div>
+  </div>
+  </div>
