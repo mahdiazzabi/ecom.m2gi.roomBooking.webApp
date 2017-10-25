@@ -1,6 +1,6 @@
-export class Hote {
+export class Client {
     
-        id:number;
+        id?:number;
         nom:String ="" ;
         prenom:String ="" ; 
         tel:String ="" ; 
