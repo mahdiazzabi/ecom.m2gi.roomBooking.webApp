@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Client } from '../../model/model.client';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-inscription',
@@ -13,8 +14,10 @@ export class InscriptionComponent implements OnInit {
    }
 
   ngOnInit() {
+    
   }
-  saveClient(){
-    console.log(this.newClient );
+
+  onSaveClient(dataForm){
+    console.log(dataForm)
   }
 }
