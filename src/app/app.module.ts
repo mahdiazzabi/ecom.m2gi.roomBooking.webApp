@@ -1,3 +1,4 @@
+import { MbscModule, mobiscroll } from '@mobiscroll/angular-trial';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,6 +16,8 @@ const appRoutes: Routes =[
   {path :'EspaceHote' , component : EspaceHoteComponent},
   {path :'ProposerLogement' , component : ProposerLogementsHoteComponent}
 ]
+mobiscroll.apiKey = '0a6be0eb';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +27,8 @@ const appRoutes: Routes =[
     LogementsHoteComponent,
     ProposerLogementsHoteComponent
   ],
-  imports: [
+  imports: [ 
+    MbscModule,
     BrowserModule, RouterModule.forRoot(appRoutes), FormsModule
   ],
   providers: [],
