@@ -1,0 +1,22 @@
+<div class="container spacer">
+    <div class="panel panel-default custom ">
+      <div class="panel-heading">Bienvenue</div>
+      <div class="panel-body">
+          <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)">
+        <div class="form-group">
+            <label class="control-label">Login:</label>
+            <input class="form-control"  type="text" ngModel name="login" required  />
+           
+        </div>
+        <div class="form-group">
+            <label class="control-label">Mot de passe:</label>
+            <input class="form-control" type="password" ngModel name="mdp" required />
+        </div>
+          <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary" > Se connecter </button>  
+          <button routerLink="/recherche" class="btn btn-primary " style="float: right;">Retour</button>
+          
+      </form>
+        
+      </div>
+    </div>
+    </div>
