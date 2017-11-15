@@ -1,9 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ImageUploadModule } from "angular2-image-upload";
-import { AccordionModule, BsDatepickerModule } from 'ngx-bootstrap';
 import {InputTextareaModule, ButtonModule, SpinnerModule, FileUploadModule} from 'primeng/primeng';
-
 import { AppComponent } from './app.component';
 import { RechercheLogementComponent } from './recherche-logement/recherche-logement.component';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
