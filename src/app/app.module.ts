@@ -14,6 +14,7 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import { LoginComponent } from './login/login.component';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { ImageUploadModule } from "angular2-image-upload";
+import { InscriptionService } from '../services/inscription.service';
 
 const appRoutes: Routes =[
   {path :'recherche' , component : RechercheLogementComponent},
@@ -39,7 +40,7 @@ const appRoutes: Routes =[
     InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
     BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule, BsDatepickerModule.forRoot()
   ],
-  providers: [],
+  providers: [InscriptionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
