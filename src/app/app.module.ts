@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AccordionModule } from 'ngx-bootstrap';
+import { ImageUploadModule } from "angular2-image-upload";
+import { AccordionModule, BsDatepickerModule } from 'ngx-bootstrap';
 import {InputTextareaModule, ButtonModule, SpinnerModule, FileUploadModule} from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
@@ -12,7 +13,7 @@ import { ProposerLogementsHoteComponent } from './proposer-logements-hote/propos
 import { RouterModule, Routes } from '@angular/router';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { LoginComponent } from './login/login.component';
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { AccordionModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { ImageUploadModule } from "angular2-image-upload";
 import { InscriptionService } from '../services/inscription.service';
 
@@ -37,8 +38,8 @@ const appRoutes: Routes =[
     LoginComponent
   ],
   imports: [ 
-    InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
-    BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule, BsDatepickerModule.forRoot()
+    AccordionModule.forRoot(), BsDatepickerModule.forRoot(), ImageUploadModule.forRoot(), InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
+    BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule
   ],
   providers: [InscriptionService],
   bootstrap: [AppComponent]
