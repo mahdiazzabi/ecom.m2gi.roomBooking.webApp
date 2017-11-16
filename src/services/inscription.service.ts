@@ -19,9 +19,7 @@ export class InscriptionService{
       }
   
       
-      getAllContacts():Observable<any>{ 
-        return this.http.get("http://localhost:8080/RoomBookingWeb/clients").map(resp=>resp.json());
-      }
+    
       
 }
 

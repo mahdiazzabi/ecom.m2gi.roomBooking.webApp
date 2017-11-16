@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { AccordionModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { ImageUploadModule } from "angular2-image-upload";
 import { InscriptionService } from '../services/inscription.service';
+import { LoginService } from '../services/login.service';
 
 const appRoutes: Routes =[
   {path :'recherche' , component : RechercheLogementComponent},
@@ -38,7 +39,7 @@ const appRoutes: Routes =[
     AccordionModule.forRoot(), BsDatepickerModule.forRoot(), ImageUploadModule.forRoot(), InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
     BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule
   ],
-  providers: [InscriptionService],
+  providers: [InscriptionService,LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
