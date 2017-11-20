@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 .spacer{
-    margin-top: 50px; 
+    margin-top: 5px;
 }
 
 .customClass {
@@ -25,3 +25,5 @@
 .customClass .img-ul-container {
     background-color: rgb(239, 241, 243) !important;
 }
+
+

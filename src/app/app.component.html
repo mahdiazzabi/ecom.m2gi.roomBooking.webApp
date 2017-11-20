@@ -1,17 +1,46 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a><img routerLink="/"  src="assets/img/Logo.png" /></a>
+    </div>
+    <ul class="nav navbar-nav "style="margin-left: 5%;">
+      <li><a routerLink="/recherche">Accueil</a></li>
+      <li><a routerLink="/inscriptionHote">Devenir Hôte</a></li>
 
-<div class="container spacer" style="text-align : right">
-        <button routerLink="/" class="btn btn-primary">Accueil</button>
-        <button routerLink="/inscriptionHote" class="btn btn-primary">Devenir Hôte</button> 
-        <button routerLink="/EspaceHote" class="btn btn-primary">Espace Hôte</button> 
-</div>
-<div class="container spacer" style="text-align : left">
-    <a><img routerLink="/"  src="assets/img/roombookingLogo.png" /></a>
-    <button routerLink="/login" class="btn btn-link" style="float: right;">Se connecter</button>  
-    <button routerLink="/inscription" class="btn btn-link" style="float: right;">S'inscrire</button>  
-    
-</div>
+
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" routerLink="/EspaceHote">Espace Hôte
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a routerLink="/EspaceHote">Mes logements</a></li>
+            <li><a routerLink="/ProposerLogement">Proposer un logement</a></li>
+          </ul>
+        </li>
+
+    </ul>
+
+    <form class="navbar-form navbar-left search">
+      <div class="input-group">
+        <input type="text" class="form-control " placeholder="Grenoble, Paris, ...">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a routerLink="/inscription"><span class="glyphicon glyphicon-user"></span> S'inscrire</a></li>
+      <li><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Se connecter </a></li>
+    </ul>
+  </div>
+</nav>
+
 
 <router-outlet>
 
 </router-outlet>
+
+
 

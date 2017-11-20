@@ -1,0 +1,43 @@
+<div class="module-card-wrap">
+  <div class="module-card" *ngFor="let c of listLogement">
+    <div class="module-card-bottom">
+      <img src="/assets/img/salon.jpg" alt="cheesecake" class="module-card-img"/>
+      <div class="module-card-title">Cheesecake</div>
+      <div class="module-card-meta">
+        <div class="module-card-category">
+          <span class="fa fa-tag"></span>
+          <span>test</span>
+        </div>
+        <div class="module-card-author">
+          <span class="fa fa-user" ></span>
+          <a href="">
+          <span>{{c.client.nom}}</span>
+          <span>{{c.client.prenom}}</span>
+          </a>
+        </div>
+      </div> <!-- /module-card-meta -->
+
+      <div>
+        <p >{{c.description | slice:0:68}}...</p>
+      </div>
+      <button class="module-card-button">See More</button>
+    </div>
+
+  </div>
+
+</div> <!-- /module-card-wrap -->
+
+<div class="container pagination bar-pagination">
+  <ul class="nav nav-pills center ">
+    <li >
+      <a [ngClass]="{'btn disabled':currentpage==0}" class="clickable" (click)="gotoPage(currentpage-1)">&laquo;</a>
+    </li>
+    <li [ngClass]="{'active':i==currentpage}" *ngFor="let p of nbrpages; let i=index">
+      <a class="clickable" (click)="gotoPage(i)">{{i}}</a>
+    </li>
+
+    <li>
+      <a [ngClass]="{'btn disabled':currentpage==nbrpages.length-1}" class="clickable" (click)="gotoPage(currentpage+1)">&raquo;</a>
+    </li>
+  </ul>
+</div>

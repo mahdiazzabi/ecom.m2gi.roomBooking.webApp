@@ -14,6 +14,9 @@ import { AccordionModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { ImageUploadModule } from "angular2-image-upload";
 import { InscriptionService } from '../services/inscription.service';
 import { LoginService } from '../services/login.service';
+import { LogementsComponent } from './logements/logements.component';
+import {LogementsServices} from "../services/logements.service";
+import {HttpModule} from "@angular/http";
 
 const appRoutes: Routes =[
   {path :'recherche' , component : RechercheLogementComponent},
@@ -21,8 +24,9 @@ const appRoutes: Routes =[
   {path :'' , redirectTo:'/recherche' , pathMatch : 'full'},
   {path :'login' , component : LoginComponent},
   {path :'EspaceHote' , component : EspaceHoteComponent},
+  {path:"logements", component:LogementsComponent},
   {path :'ProposerLogement' , component : ProposerLogementsHoteComponent}
-  
+
 ]
 @NgModule({
   declarations: [
@@ -33,13 +37,14 @@ const appRoutes: Routes =[
     LogementsHoteComponent,
     ProposerLogementsHoteComponent,
     InscriptionComponent,
-    LoginComponent
+    LoginComponent,
+    LogementsComponent,
   ],
-  imports: [ 
+  imports: [
     AccordionModule.forRoot(), BsDatepickerModule.forRoot(), ImageUploadModule.forRoot(), InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
-    BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule
+    BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule,HttpModule
   ],
-  providers: [InscriptionService,LoginService],
+  providers: [InscriptionService,LoginService,LogementsServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

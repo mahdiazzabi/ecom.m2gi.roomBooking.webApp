@@ -1,0 +1,9 @@
+{
+  "/": {
+    "target":"http://localhost:8080",
+    "secure": false,
+    "pathRewrite": { "^/logements": "/logements" },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
