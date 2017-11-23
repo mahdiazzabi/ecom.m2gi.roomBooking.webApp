@@ -5,11 +5,11 @@
     </div>
     <ul class="nav navbar-nav "style="margin-left: 5%;">
       <li><a routerLink="/recherche">Accueil</a></li>
-      <li><a routerLink="/inscriptionHote">Devenir Hôte</a></li>
+      <li *ngIf="isLoggedIn && !currentUser.isHote"><a routerLink="/ProposerLogement">Devenir Hôte</a></li>
 
 
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" routerLink="/EspaceHote">Espace Hôte
+          <a *ngIf="isLoggedIn && currentUser.isHote " class="dropdown-toggle" data-toggle="dropdown" routerLink="/EspaceHote">Espace Hôte
             <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a routerLink="/EspaceHote">Mes logements</a></li>
@@ -31,8 +31,9 @@
     </form>
 
     <ul class="nav navbar-nav navbar-right">
-      <li><a routerLink="/inscription"><span class="glyphicon glyphicon-user"></span> S'inscrire</a></li>
-      <li><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Se connecter </a></li>
+      <li><a *ngIf="!isLoggedIn" routerLink="/inscription"><span class="glyphicon glyphicon-user"></span> S'inscrire</a></li>
+      <li><a *ngIf="!isLoggedIn" routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Se connecter </a></li>
+      <li><a *ngIf="isLoggedIn"  (click)="logOut()"><span class="glyphicon glyphicon-log-in"></span> Se déconnecter </a></li>
     </ul>
   </div>
 </nav>
