@@ -12,11 +12,11 @@ import { RequestOptions , Headers } from '@angular/http';
 })
 export class InscriptionComponent implements OnInit {
   
- newClient: Client ;
+ newClient : any;
  savingErr: any = null;
 
   constructor(private activatedRoute: ActivatedRoute,
-    private router: Router,private inscriptionService:InscriptionService) {
+    private router: Router,private inscriptionService:InscriptionService ) {
 
    }
 
@@ -25,9 +25,11 @@ export class InscriptionComponent implements OnInit {
   }
 
   onSaveClient(dataForm){  
-    this.newClient = {nom:dataForm.nom,prenom:dataForm.prenom,email:dataForm.email,telephone:dataForm.telephone,mdp:dataForm.mdp,adresse:"",isHote:false};  
-    //TODO : synchroniser newClient avec ngModel directement et enlever le parametre dataForm
+      
     
+      //TODO : synchroniser newClient avec ngModel directement et enlever le parametre dataForm
+      this.newClient =  {nom:dataForm.nom,prenom:dataForm.prenom,email:dataForm.email,telephone:dataForm.telephone,mdp:btoa(dataForm.mdp),adresse:"",isHote:false};
+
     this.inscriptionService.save(this.newClient).subscribe(response => {
       if (response.err) {
         this.savingErr = response.err;

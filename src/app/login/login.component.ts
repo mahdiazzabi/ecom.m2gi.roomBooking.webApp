@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(dataForm){  
    
-    this.loginService.logIn(dataForm.mail , dataForm.mdp).subscribe(response => {
+    this.loginService.logIn(dataForm.mail ,btoa( dataForm.mdp)).subscribe(response => {
       if (response.err) {
         this.savingErr = response.err;
         //TODO : afficher le msg d'erreur
