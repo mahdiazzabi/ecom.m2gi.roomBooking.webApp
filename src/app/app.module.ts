@@ -15,7 +15,7 @@ import { ImageUploadModule } from "angular2-image-upload";
 import { InscriptionService } from '../services/inscription.service';
 import { LoginService } from '../services/login.service';
 import { LogementsComponent } from './logements/logements.component';
-import {LogementsServices} from "../services/logements.service";
+import {ProposerLogementServices} from "../services/Proposerlogement.service";
 import {HttpModule} from "@angular/http";
 
 const appRoutes: Routes =[
@@ -44,7 +44,7 @@ const appRoutes: Routes =[
     AccordionModule.forRoot(), BsDatepickerModule.forRoot(), ImageUploadModule.forRoot(), InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
     BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule,HttpModule
   ],
-  providers: [InscriptionService,LoginService,LogementsServices],
+  providers: [InscriptionService, LoginService, ProposerLogementServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

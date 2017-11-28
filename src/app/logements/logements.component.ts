@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LogementsServices} from "../../services/logements.service";
+import {ProposerLogementServices} from "../../services/Proposerlogement.service";
 import {Http} from "@angular/http";
 
 @Component({
@@ -14,7 +14,7 @@ export class LogementsComponent implements OnInit {
   size:number=4;
   nbrpages:Array<number>;
 
-  constructor(public http:Http, public logementsdervice:LogementsServices) { }
+  constructor(public http:Http, public logementsdervice:ProposerLogementServices) { }
 
   ngOnInit() {
    this.doGet();
