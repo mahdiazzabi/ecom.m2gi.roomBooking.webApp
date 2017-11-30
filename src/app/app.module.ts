@@ -16,6 +16,7 @@ import { LogementsComponent } from './logements/logements.component';
 import {HttpModule} from "@angular/http";
 import { LogementsServices } from '../services/logements.service';
 import { ProposerLogementsHoteComponent } from './proposer-logements-hote/proposer-logements-hote.component';
+import { ManageAvailabilityComponent } from './manage-availability/manage-availability.component';
 
 const appRoutes: Routes =[
   {path :'recherche' , component : RechercheLogementComponent},
@@ -24,8 +25,8 @@ const appRoutes: Routes =[
   {path :'login' , component : LoginComponent},
   {path :'EspaceHote' , component : EspaceHoteComponent},
   {path:"logements", component:LogementsComponent},
-  {path :'ProposerLogement' , component : ProposerLogementsHoteComponent}
-
+  {path :'ProposerLogement' , component : ProposerLogementsHoteComponent},
+  {path :'disponibilite' , component : ManageAvailabilityComponent}
 ]
 @NgModule({
   declarations: [
@@ -37,6 +38,8 @@ const appRoutes: Routes =[
     InscriptionComponent,
     LoginComponent,
     LogementsComponent,
+    ManageAvailabilityComponent
+
   ],
   imports: [
     AccordionModule.forRoot(), BsDatepickerModule.forRoot(), ImageUploadModule.forRoot(), InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
