@@ -1,5 +1,7 @@
 import {Http} from "@angular/http";
 import {Injectable} from "@angular/core";
+import { Logement } from "../model/model.logement";
+import { Observable } from "rxjs/Observable";
 @Injectable()
 export class LogementsServices{
 
@@ -13,4 +15,12 @@ export class LogementsServices{
 
   }
 
+  public addLogements(logement:Logement):Observable<LogementResponse> {
+    
+    return this.http.post(`http://localhost:8080/RoomBookingWeb/logement`,logement).map(resp=>resp.json());
+  } 
+}
+export interface LogementResponse {
+  err: any;
+  logement: Logement;
 }

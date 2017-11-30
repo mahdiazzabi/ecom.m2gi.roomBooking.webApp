@@ -5,8 +5,6 @@ import { AppComponent } from './app.component';
 import { RechercheLogementComponent } from './recherche-logement/recherche-logement.component';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { EspaceHoteComponent } from './espace-hote/espace-hote.component';
-import { LogementsHoteComponent } from './logements-hote/logements-hote.component';
-import { ProposerLogementsHoteComponent } from './proposer-logements-hote/proposer-logements-hote.component';
 import { RouterModule, Routes } from '@angular/router';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { LoginComponent } from './login/login.component';
@@ -15,8 +13,9 @@ import { ImageUploadModule } from "angular2-image-upload";
 import { InscriptionService } from '../services/inscription.service';
 import { LoginService } from '../services/login.service';
 import { LogementsComponent } from './logements/logements.component';
-import {ProposerLogementServices} from "../services/Proposerlogement.service";
 import {HttpModule} from "@angular/http";
+import { LogementsServices } from '../services/logements.service';
+import { ProposerLogementsHoteComponent } from './proposer-logements-hote/proposer-logements-hote.component';
 
 const appRoutes: Routes =[
   {path :'recherche' , component : RechercheLogementComponent},
@@ -34,7 +33,6 @@ const appRoutes: Routes =[
     InscriptionComponent,
     RechercheLogementComponent,
     EspaceHoteComponent,
-    LogementsHoteComponent,
     ProposerLogementsHoteComponent,
     InscriptionComponent,
     LoginComponent,
@@ -44,7 +42,7 @@ const appRoutes: Routes =[
     AccordionModule.forRoot(), BsDatepickerModule.forRoot(), ImageUploadModule.forRoot(), InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
     BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule,HttpModule
   ],
-  providers: [InscriptionService, LoginService, ProposerLogementServices],
+  providers: [InscriptionService, LoginService, LogementsServices],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

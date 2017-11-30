@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccordionConfig } from 'ngx-bootstrap/accordion';
 import {Logement} from '../../model/model.logement';
-import { ProposerLogementServices } from '../../services/ProposerLogement.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RequestOptions , Headers } from '@angular/http';
+import { LogementsServices } from '../../services/logements.service';
 export function getAccordionConfig(): AccordionConfig {
     return Object.assign(new AccordionConfig(), { closeOthers: true });
 }
@@ -14,7 +14,7 @@ declare var $:any;
   selector: 'app-proposer-logements-hote',
   templateUrl: './proposer-logements-hote.component.html',
   styleUrls: ['./proposer-logements-hote.component.css'],
-  providers: [{ provide: AccordionConfig, useFactory: getAccordionConfig }, ProposerLogementServices]
+  providers: [{ provide: AccordionConfig, useFactory: getAccordionConfig }, LogementsServices]
 })
 export class ProposerLogementsHoteComponent implements OnInit {
 
@@ -24,12 +24,12 @@ newLogement: Logement ;
 savingErr: any = null;
 
  constructor(private activatedRoute: ActivatedRoute,
-   private router: Router,private proposerlogementService:ProposerLogementServices,private formBuilder: FormBuilder) {
+   private router: Router,private logementService:LogementsServices,private formBuilder: FormBuilder) {
 
   }
   onSaveLogement(dataForm){
     this.newLogement = {titre:dataForm.titre,nbt_voyageurs:dataForm.nbt_voyageurs,nbr_chamber:dataForm.nbr_chamber,nbr_salle_bain:dataForm.nbr_salle_bain,ville:dataForm.ville,code_postal:dataForm.code_postal,adresse:dataForm.adresse,prix:dataForm.prix,description:dataForm.description};  
-    this.proposerlogementService.addLogements(this.newLogement).subscribe(response => {
+    this.logementService.addLogements(this.newLogement).subscribe(response => {
       if (response.err) {
         this.savingErr = response.err;
       } else {
