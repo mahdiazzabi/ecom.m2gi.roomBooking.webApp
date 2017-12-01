@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ProposerLogementServices} from "../../services/Proposerlogement.service";
 import {Http} from "@angular/http";
+import { LogementsServices } from '../../services/logements.service';
 
 @Component({
   selector: 'app-logements',
@@ -14,7 +14,7 @@ export class LogementsComponent implements OnInit {
   size:number=4;
   nbrpages:Array<number>;
 
-  constructor(public http:Http, public logementsdervice:ProposerLogementServices) { }
+  constructor(public http:Http, public logementsdervice:LogementsServices) { }
 
   ngOnInit() {
    this.doGet();
