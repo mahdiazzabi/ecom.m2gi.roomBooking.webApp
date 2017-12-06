@@ -6,6 +6,8 @@ import {Logement} from '../../model/model.logement';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RequestOptions , Headers } from '@angular/http';
 import { LogementsServices } from '../../services/logements.service';
+import { Client } from '../../model/model.client';
+import { ClientService } from '../../services/client.service';
 export function getAccordionConfig(): AccordionConfig {
     return Object.assign(new AccordionConfig(), { closeOthers: true });
 }
@@ -18,28 +20,41 @@ declare var $:any;
 })
 export class ProposerLogementsHoteComponent implements OnInit {
 
-  myForm: FormGroup;
-
+myForm: FormGroup;
+private currentUser : Client ;
 newLogement: Logement ;
 savingErr: any = null;
 
  constructor(private activatedRoute: ActivatedRoute,
-   private router: Router,private logementService:LogementsServices,private formBuilder: FormBuilder) {
+   private router: Router,private logementService:LogementsServices,private clientService:ClientService,private formBuilder: FormBuilder) {
 
   }
   onSaveLogement(dataForm){
-    this.newLogement = {titre:dataForm.titre,nbt_voyageurs:dataForm.nbt_voyageurs,nbr_chamber:dataForm.nbr_chamber,nbr_salle_bain:dataForm.nbr_salle_bain,ville:dataForm.ville,code_postal:dataForm.code_postal,adresse:dataForm.adresse,prix:dataForm.prix,description:dataForm.description};  
+    this.newLogement = {titre:dataForm.titre,nbt_voyageurs:dataForm.nbt_voyageurs,nbr_chamber:dataForm.nbr_chamber,nbr_salle_bain:dataForm.nbr_salle_bain,ville:dataForm.ville,code_postal:dataForm.code_postal,adresse:dataForm.adresse,prix:dataForm.prix,description:dataForm.description, client: JSON.parse(sessionStorage.getItem("currentUser"))};  
     this.logementService.addLogements(this.newLogement).subscribe(response => {
       if (response.err) {
         this.savingErr = response.err;
       } else {
-        this.router.navigate(['/EspaceHote']);
+        this.currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+        this.currentUser.isHote = true ;
+        this.clientService.update(this.currentUser).subscribe(response => {
+            if (response.err) {
+             this.savingErr = response.err;
+            }else{
+                
+            sessionStorage.setItem("currentUser", JSON.stringify(response.client));
+            }
+
+        });
+        this.router.navigate(['/EspaceHote', {currentClient : this.currentUser  }]);
       }
     });
 
 }
 
 ngOnInit() {
+    
+
   this.myForm = this.formBuilder.group({
       date: null,
       range: null

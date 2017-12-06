@@ -16,9 +16,15 @@ export class LogementsServices{
   }
 
   public addLogements(logement:Logement):Observable<LogementResponse> {
-    
-    return this.http.post(`http://localhost:8080/RoomBookingWeb/logement`,logement).map(resp=>resp.json());
+    console.log(logement);
+    return this.http.post(`http://localhost:8080/RoomBookingWeb/logement`,logement).map(resp=>{
+      const body: any = resp.json();
+      return {err: null, logement: body };
+        }
+      );
   } 
+
+  
 }
 export interface LogementResponse {
   err: any;
