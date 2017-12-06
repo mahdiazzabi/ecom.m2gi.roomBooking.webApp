@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LoginService } from '../services/login.service';
+import { ClientService } from '../services/client.service';
 import { Observable } from 'rxjs/Observable';
 import { Client } from '../model/model.client';
 
@@ -12,20 +12,19 @@ export class AppComponent implements OnInit , OnDestroy{
   
   private isLoggedIn = false;
   private loginSub;
-  private currentUser : Client ;
+  private currentClient : Client ;
 
   title = 'app';
-  constructor(private loginService : LoginService){
+  constructor(private clientService : ClientService){
 
   }
 
   ngOnInit() {
-    this.loginSub = this.loginService.isLoggedIn.subscribe(val => {
+    this.loginSub = this.clientService.isLoggedIn.subscribe(val => {
       this.isLoggedIn = val;
-    });;
-    if (typeof(Storage) !== 'undefined'){
-      this.currentUser = JSON.parse( sessionStorage.getItem("currrentUser")) ;
-    }
+    });
+      this.currentClient = JSON.parse( sessionStorage.getItem("currentUser")) ;
+    
   }
  
   ngOnDestroy() {
@@ -33,7 +32,8 @@ export class AppComponent implements OnInit , OnDestroy{
   }
 
   logOut(){
-    this.loginService.logOut() ;
+    sessionStorage.clear();
+    this.clientService.logOut() ;
     
   }
 

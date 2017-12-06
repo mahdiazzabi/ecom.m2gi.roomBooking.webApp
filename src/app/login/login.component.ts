@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../../services/login.service';
+import { ClientService } from '../../services/client.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Client } from '../../model/model.client';
 
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   savingErr: any = null;
  
    constructor(private activatedRoute: ActivatedRoute,
-     private router: Router,private loginService:LoginService) {
+     private router: Router,private clientService:ClientService) {
  
     }
   ngOnInit() {
@@ -23,13 +23,14 @@ export class LoginComponent implements OnInit {
 
   onLogin(dataForm){  
    
-    this.loginService.logIn(dataForm.mail ,btoa( dataForm.mdp)).subscribe(response => {
+    this.clientService.logIn(dataForm.mail ,btoa( dataForm.mdp)).subscribe(response => {
       if (response.err) {
         this.savingErr = response.err;
         //TODO : afficher le msg d'erreur
       } else {
         this.currentClient = response.client ;
-        this.router.navigate(['/recherche']);
+        sessionStorage.setItem("currentUser" ,JSON.stringify(this.currentClient));
+        this.router.navigate(['/recherche', {currentClient : this.currentClient  }]);
       }
     });
   }
