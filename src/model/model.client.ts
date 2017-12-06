@@ -1,6 +1,6 @@
 export class Client {
     
-        id?:number;
+        id_client?:number;
         nom:String ="" ;
         prenom:String ="" ; 
         email:String ="" ;

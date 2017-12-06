@@ -7,6 +7,10 @@ import {
 } from '@angular/forms';
 
 import * as moment from 'moment';
+import { Router } from '@angular/router';
+import { Logement } from '../../model/model.logement';
+import { CalendrierService } from '../../services/calendrier.service';
+import { Calendrier } from '../../model/model.Calendrier';
 
 @Component({
   selector: 'app-manage-availability',
@@ -14,15 +18,16 @@ import * as moment from 'moment';
   styleUrls: ['./manage-availability.component.css']
 })
 export class ManageAvailabilityComponent implements OnInit {
+  savingErr: any;
   public date = moment();
   public dateForm: FormGroup;
-
-  public isReserved = null;
-
+  calenderToadd :Calendrier;
+  public currentLogement : Logement ;
+  public listCalenderLogement : Calendrier[] ;
   public daysArr;
-
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder  , private calendrierService : CalendrierService,private router: Router) {
     this.initDateRange();
+   
   }
 
   public initDateRange() {
@@ -33,7 +38,21 @@ export class ManageAvailabilityComponent implements OnInit {
   }
 
   public ngOnInit() {
+    this.listCalenderLogement = new Array();
+    //for test
+    this.currentLogement = {id_logement:1,titre:"test",nbt_voyageurs:1,nbr_chamber:1,nbr_salle_bain:1,ville:"grenoble",code_postal:"52555",adresse:"test",prix:26,description:"test", client:JSON.parse(sessionStorage.getItem("currentUser"))};   
+    //--------
+    this.calendrierService.get_CalendrierLogement(this.currentLogement.id_logement).subscribe(response => {
+      if (response.err) {
+        this.savingErr = response.err;
+        //TODO : afficher le msg d'erreur
+      } else {
+        this.listCalenderLogement = response.listCalendrier ;
+      }
+    });
+
     this.daysArr = this.createCalendar(this.date);
+    //initListCalender
   }
 
   public createCalendar(month) {
@@ -73,13 +92,36 @@ export class ManageAvailabilityComponent implements OnInit {
     }
     let dateFromMoment = this.dateForm.value.dateFrom;
     let dateToMoment = this.dateForm.value.dateTo;
-    this.isReserved = `Reserved from ${dateFromMoment} to ${dateToMoment}`;
+    this.currentLogement = {id_logement:1,titre:"test",nbt_voyageurs:1,nbr_chamber:1,nbr_salle_bain:1,ville:"grenoble",code_postal:"52555",adresse:"test",prix:26,description:"test", client: JSON.parse(sessionStorage.getItem("currentUser"))};  
+    this.calenderToadd = {date_debut:new Date(dateFromMoment) , date_fin:new Date(dateToMoment), logement:this.currentLogement};
+    this.calendrierService.addInDispo(this.calenderToadd).subscribe(response => {
+      if (response.err) {
+        this.savingErr = response.err;
+      } else {
+        this.calenderToadd = response.calendrier ;
+        this.listCalenderLogement.push(this.calenderToadd);
+      }
+    });
+  }
+
+  public isReserved(day) {
+    
+   
+    if (this.listCalenderLogement) {
+      
+            for (var index = 0; index < this.listCalenderLogement.length; index++) {
+              var element = this.listCalenderLogement[index];
+              if ( moment(new Date(element.date_debut)).isSameOrBefore(day) && moment(new Date(element.date_fin)).isSameOrAfter(day)) {
+                return true ;
+              
+              } ;
+            }
+          } 
+    
   }
 
   public isSelected(day) {
-    if (!day) {
-      return false;
-    }
+   
     let dateFromMoment = moment(this.dateForm.value.dateFrom, 'MM/DD/YYYY');
     let dateToMoment = moment(this.dateForm.value.dateTo, 'MM/DD/YYYY');
     if (this.dateForm.valid) {

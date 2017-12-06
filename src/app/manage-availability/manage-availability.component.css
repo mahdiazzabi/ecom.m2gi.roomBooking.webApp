@@ -28,13 +28,20 @@ a.active {
     background: peru;
     opacity: 0.6;
 }
-
+.disabled {
+    cursor: not-allowed;
+    background: peru;
+    opacity: 0.6;
+}
 .today {
     color: red;
 }
 
-.reserved {
-    color: blueviolet;
+reserved {
+    background: peru;
+    opacity: 0.6;
+    pointer-events: none;
+    opacity: 0.4;
 }
 
 h1 {

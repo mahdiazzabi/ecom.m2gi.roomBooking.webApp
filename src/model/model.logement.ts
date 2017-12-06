@@ -1,3 +1,5 @@
+import { Client } from "./model.client";
+
 export class Logement {
     id_logement?:number;
     titre:String;
@@ -9,5 +11,5 @@ export class Logement {
     adresse:String ="" ;
     prix:number ;
     description:String ="" ;
-        
+    client:Client;    
     }
