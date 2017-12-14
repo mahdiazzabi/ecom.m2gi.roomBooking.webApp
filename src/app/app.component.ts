@@ -16,7 +16,8 @@ export class AppComponent implements OnInit , OnDestroy{
 
   title = 'app';
   constructor(private clientService : ClientService){
-
+    this.currentClient = JSON.parse( sessionStorage.getItem("currentUser")) ;
+    
   }
 
   ngOnInit() {

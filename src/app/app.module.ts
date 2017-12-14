@@ -17,6 +17,7 @@ import { LogementsServices } from '../services/logements.service';
 import { ProposerLogementsHoteComponent } from './proposer-logements-hote/proposer-logements-hote.component';
 import { ManageAvailabilityComponent } from './manage-availability/manage-availability.component';
 import { CalendrierService } from '../services/calendrier.service';
+import { ResultatRechercheComponent } from './resultat-recherche/resultat-recherche.component';
 
 const appRoutes: Routes =[
   {path :'recherche' , component : RechercheLogementComponent},
@@ -38,9 +39,11 @@ const appRoutes: Routes =[
     InscriptionComponent,
     LoginComponent,
     LogementsComponent,
-    ManageAvailabilityComponent
+    ManageAvailabilityComponent,
+    ResultatRechercheComponent
 
   ],
+  
   imports: [
     AccordionModule.forRoot(), BsDatepickerModule.forRoot(), ImageUploadModule.forRoot(), InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
     BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule,HttpModule
