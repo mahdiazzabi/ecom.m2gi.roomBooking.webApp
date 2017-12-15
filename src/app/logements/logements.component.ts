@@ -18,8 +18,7 @@ export class LogementsComponent implements OnInit {
   @Input('fromRecherche') fromRecherche: Boolean;
 
 
-  @Input('getSearchStatus') getSearchStatus: Boolean;
-  @Output() getSearchStatusChange = new EventEmitter<boolean>();
+  @Output() getSearchStatus = new EventEmitter<Boolean>();
 
 
   constructor(public http:Http, public logementsdervice:LogementsServices) { 
@@ -54,7 +53,6 @@ export class LogementsComponent implements OnInit {
         this.logementsdervice.getLogements(this.currentpage,this.size)
           .subscribe(data=>{this.listLogement=data.logemens;
             this.nbrpages = new Array(data.total);
-            this.getSearchStatus = true ;   
           },err=>{console.log(err);})
       }
 
@@ -64,14 +62,17 @@ export class LogementsComponent implements OnInit {
               .subscribe(data=>{
                 this.listLogement=data.logemens;
                 this.nbrpages = new Array(data.total);
-                this.getSearchStatus = true ;  
                 //to notify parent recherche-result 
-                this.getSearchStatusChange.emit(true);
+                if (this.listLogement.length > 0) {
+                  
+                this.getSearchStatus.emit(true);
+                }else{
+                  
+                this.getSearchStatus.emit(false);
+                }
               },err=>{
                 console.log(err);
-                this.getSearchStatus = false ;  
                 //to notify parent recherche-result 
-                this.getSearchStatusChange.emit(false);
               })
           }
 

@@ -2,9 +2,9 @@
 <div *ngIf="fromRecherche">
 
   <h2 >
-    <p  *ngIf="getSearchStatus" > Tous nos logements à {{recherche.ville}}</p> 
+    <p  *ngIf="getSearchStatus" > Tous nos logements à {{recherche.villeRecherche}}</p> 
     <p  *ngIf="!getSearchStatus" > Aucun logement n'est disponible  </p> 
    </h2>
 
-  <app-logements [fromRecherche]="true"  [recherche]="recherche" [(getSearchStatus)]="getSearchStatus" >  </app-logements>
+  <app-logements [fromRecherche]="true"  [recherche]="recherche" (getSearchStatus)="resultat($event)" >  </app-logements>
 </div>

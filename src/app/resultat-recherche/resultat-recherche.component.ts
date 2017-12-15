@@ -12,15 +12,19 @@ export class ResultatRechercheComponent implements OnInit {
   
   @Input('fromRecherche') fromRecherche: Boolean;
 
-  getSearchStatus : Boolean ;
+  public getSearchStatus : Boolean ;
 
   constructor() { 
-    this.getSearchStatus = false ;
   }
 
   ngOnchanges(changes : SimpleChanges){
-   
+   console.log( this.getSearchStatus);
   }
+  
+  resultat(value:Boolean){
+    this.getSearchStatus = value ;
+  }
+
   
   ngOnInit() {
     
