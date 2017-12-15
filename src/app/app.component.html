@@ -5,20 +5,11 @@
     </div>
     <ul class="nav navbar-nav "style="margin-left: 5%;">
       <li *ngIf="isLoggedIn && !currentClient.isHote"><a routerLink="/ProposerLogement">Devenir Hôte</a></li>
+      <li *ngIf="isLoggedIn && currentClient.isHote" ><a routerLink="/EspaceHote">Mon Espace Hôte</a></li>
+      
 
-
-        <li class="dropdown">
-          <a *ngIf="isLoggedIn && currentClient.isHote " class="dropdown-toggle" data-toggle="dropdown" routerLink="/EspaceHote">Espace Hôte
-            <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a routerLink="/EspaceHote">Mes logements</a></li>
-            <li><a routerLink="/ProposerLogement">Proposer un logement</a></li>
-          </ul>
-        </li>
 
     </ul>
-
-   
 
     <ul class="nav navbar-nav navbar-right">
       <li><a *ngIf="!isLoggedIn" routerLink="/inscription"><span class="glyphicon glyphicon-user"></span> S'inscrire</a></li>
