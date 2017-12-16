@@ -19,6 +19,10 @@ export class LogementsServices{
     return this.http.get(`http://localhost:8080/RoomBookingWeb/pagelogementRecherche/${page}/${size}/${JSON.stringify(recherche)}`).map((resp)=>resp.json());
 
   }
+  getLogementsByClientHote(id:number){
+    return this.http.get(`http://localhost:8080/RoomBookingWeb/pagelogementRecherche/${id}`).map((resp)=>resp.json());
+
+  }
 
   public addLogements(logement:Logement):Observable<LogementResponse> {
     console.log(logement);
