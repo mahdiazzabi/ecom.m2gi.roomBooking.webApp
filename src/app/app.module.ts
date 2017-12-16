@@ -17,6 +17,7 @@ import { LogementsServices } from '../services/logements.service';
 import { ProposerLogementsHoteComponent } from './proposer-logements-hote/proposer-logements-hote.component';
 import { ManageAvailabilityComponent } from './manage-availability/manage-availability.component';
 import { CalendrierService } from '../services/calendrier.service';
+import { DetailsLogementComponent } from './details-logement/details-logement.component';
 import { ResultatRechercheComponent } from './resultat-recherche/resultat-recherche.component';
 import {AuthManager} from '../services/authManager';
 import {AuthHoteManager} from '../services/authHoteManager';
@@ -28,8 +29,10 @@ const appRoutes: Routes =[
   {path :'login' , component : LoginComponent},
   {path :'EspaceHote' , component : EspaceHoteComponent , canActivate : [AuthHoteManager]},
   {path:"logements", component:LogementsComponent},
-  {path :'ProposerLogement' , component : ProposerLogementsHoteComponent ,canActivate : [AuthManager]},
-  {path :'disponibilite' , component : ManageAvailabilityComponent , canActivate : [AuthHoteManager]}
+  {path :'ProposerLogement' , component : ProposerLogementsHoteComponent},
+  {path :'disponibilite' , component : ManageAvailabilityComponent},
+  {path:"detailsLogement", component : DetailsLogementComponent},
+
 ]
 @NgModule({
   declarations: [
@@ -42,6 +45,7 @@ const appRoutes: Routes =[
     LoginComponent,
     LogementsComponent,
     ManageAvailabilityComponent,
+    DetailsLogementComponent,
     ResultatRechercheComponent
 
   ],

@@ -1,3 +1,6 @@
+
+import { Logement } from '../../model/model.logement';
+import { Router } from '@angular/router';
 import { Component, OnInit ,Input, SimpleChanges, SimpleChange, Output, EventEmitter} from '@angular/core';
 import {Http} from "@angular/http";
 import { LogementsServices } from '../../services/logements.service';
@@ -11,8 +14,10 @@ import { Recherche } from '../../utils/utils.recherche';
 export class LogementsComponent implements OnInit {
   listLogement: Array<any> = null;
   currentpage:number=0;
-  size:number=20;
+  size:number=4;
   nbrpages:Array<number>;
+  currentLogement:Logement;
+  mode:number;
 
   @Input('recherche') recherche: Recherche;
   @Input('fromRecherche') fromRecherche: Boolean;
@@ -21,8 +26,9 @@ export class LogementsComponent implements OnInit {
   @Output() getSearchStatus = new EventEmitter<Boolean>();
 
 
-  constructor(public http:Http, public logementsdervice:LogementsServices) { 
+  constructor(public http:Http, public logementsService:LogementsServices) { 
     this.nbrpages= new Array(0);
+    this.mode = 0
   }
   
   ngOnChanges(changes: SimpleChanges) {
@@ -34,8 +40,7 @@ export class LogementsComponent implements OnInit {
     this.doGetAllLogements();
     //from espace-hote getLogementByClient...
   }
-  }
-  
+  } 
   ngOnInit() {
     if (this.fromRecherche) {
       this.doGetLogementsByVilleDateFromDateTo();
@@ -50,7 +55,7 @@ export class LogementsComponent implements OnInit {
 
   doGetAllLogements(){
     
-        this.logementsdervice.getLogements(this.currentpage,this.size)
+        this.logementsService.getLogements(this.currentpage,this.size)
           .subscribe(data=>{this.listLogement=data.logemens;
             this.nbrpages = new Array(data.total);
           },err=>{console.log(err);})
@@ -58,7 +63,7 @@ export class LogementsComponent implements OnInit {
 
   doGetLogementsByVilleDateFromDateTo(){
     
-            this.logementsdervice.getLogementsByRecherche(this.currentpage,this.size,this.recherche)
+            this.logementsService.getLogementsByRecherche(this.currentpage,this.size,this.recherche)
               .subscribe(data=>{
                 this.listLogement=data.logemens;
                 this.nbrpages = new Array(data.total);
@@ -76,10 +81,25 @@ export class LogementsComponent implements OnInit {
               })
           }
 
+
+
   gotoPage(i:number){
     this.currentpage=i;
     this.doGetAllLogements();
 
+  }
+
+  getLogement(logement:Logement,m:number){
+    console.log(logement);
+    this.currentLogement=logement;
+    this.mode=m;
+    //this.router.navigate(['detailsLogement',mode]);
+
+  }
+
+  getValueMode(m : number){
+       this.mode=m;
+    // console.log(this.mode);
   }
 
 }
