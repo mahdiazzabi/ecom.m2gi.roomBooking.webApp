@@ -18,13 +18,16 @@ import { ProposerLogementsHoteComponent } from './proposer-logements-hote/propos
 import { ManageAvailabilityComponent } from './manage-availability/manage-availability.component';
 import { CalendrierService } from '../services/calendrier.service';
 import { DetailsLogementComponent } from './details-logement/details-logement.component';
+import { ResultatRechercheComponent } from './resultat-recherche/resultat-recherche.component';
+import {AuthManager} from '../services/authManager';
+import {AuthHoteManager} from '../services/authHoteManager';
 
 const appRoutes: Routes =[
   {path :'recherche' , component : RechercheLogementComponent},
   {path :'inscription' , component : InscriptionComponent},
   {path :'' , redirectTo:'/recherche' , pathMatch : 'full'},
   {path :'login' , component : LoginComponent},
-  {path :'EspaceHote' , component : EspaceHoteComponent},
+  {path :'EspaceHote' , component : EspaceHoteComponent , canActivate : [AuthHoteManager]},
   {path:"logements", component:LogementsComponent},
   {path :'ProposerLogement' , component : ProposerLogementsHoteComponent},
   {path :'disponibilite' , component : ManageAvailabilityComponent},
@@ -42,13 +45,16 @@ const appRoutes: Routes =[
     LoginComponent,
     LogementsComponent,
     ManageAvailabilityComponent,
-    DetailsLogementComponent
+    DetailsLogementComponent,
+    ResultatRechercheComponent
+
   ],
+  
   imports: [
     AccordionModule.forRoot(), BsDatepickerModule.forRoot(), ImageUploadModule.forRoot(), InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
     BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule,HttpModule
   ],
-  providers: [ClientService, LogementsServices, CalendrierService],
+  providers: [ClientService, LogementsServices, CalendrierService ,AuthManager , AuthHoteManager],
   bootstrap: [AppComponent]
 })
 

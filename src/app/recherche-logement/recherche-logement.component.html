@@ -1,21 +1,22 @@
 <div class="container spacer" >
-    
+    <form [formGroup]='RechercheForm' class='flex-container flex-center'>
+        
       <div class="form-inline">
           <div class="form-group">
             <label >Où  </label>
-            <input type="text" class="form-control" [(ngModel)]="recherche.villeRecherche"/>
+            <input  name='ville' formControlName='ville' type="text" class="form-control" />
           </div>
           <div class="form-group">
               <label >Du </label>
-              <input type="date" class="form-control" [(ngModel)]="recherche.dateDebut"/>
+              <input name='dateFrom' formControlName='dateFrom' type="date" class="form-control" />
           </div>
           <div class="form-group">
               <label >Au </label>
-              <input type="date" class="form-control" [(ngModel)]="recherche.dateFin"/>
+              <input  name='dateTo' formControlName='dateTo' type="date" class="form-control" />
           </div>
           <div class="form-group">
               <label >Nombre de voyageurs </label>
-              <select class="selectpicker" [(ngModel)]="recherche.nbrVoyageur">
+              <select class="selectpicker"   name='nbrVoyageur' formControlName='nbrVoyageur'>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -30,5 +31,11 @@
             </div>
           
           <button type="submit" class="btn btn-default" (click)= "rechercheLogement()" >Rechercher</button>
-          </div> 
+        </div> 
+    </form>
+
+
+
     </div>
+    <app-resultat-recherche *ngIf="fromRecherche" [fromRecherche]="fromRecherche"  [recherche]="recherche"  >  </app-resultat-recherche>
+    
