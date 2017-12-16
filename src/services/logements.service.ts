@@ -14,6 +14,11 @@ export class LogementsServices{
       .map((resp)=>resp.json());
 
   }
+  getLogement(id:number){
+     return this.http.get("http://localhost:8080/RoomBookingWeb/logement/"+id)
+     .map((resp)=>resp.json());
+  }
+
 
   public addLogements(logement:Logement):Observable<LogementResponse> {
     console.log(logement);

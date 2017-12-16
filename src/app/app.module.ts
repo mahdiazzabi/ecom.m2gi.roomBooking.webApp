@@ -17,6 +17,7 @@ import { LogementsServices } from '../services/logements.service';
 import { ProposerLogementsHoteComponent } from './proposer-logements-hote/proposer-logements-hote.component';
 import { ManageAvailabilityComponent } from './manage-availability/manage-availability.component';
 import { CalendrierService } from '../services/calendrier.service';
+import { DetailsLogementComponent } from './details-logement/details-logement.component';
 
 const appRoutes: Routes =[
   {path :'recherche' , component : RechercheLogementComponent},
@@ -26,7 +27,9 @@ const appRoutes: Routes =[
   {path :'EspaceHote' , component : EspaceHoteComponent},
   {path:"logements", component:LogementsComponent},
   {path :'ProposerLogement' , component : ProposerLogementsHoteComponent},
-  {path :'disponibilite' , component : ManageAvailabilityComponent}
+  {path :'disponibilite' , component : ManageAvailabilityComponent},
+  {path:"detailsLogement", component : DetailsLogementComponent},
+
 ]
 @NgModule({
   declarations: [
@@ -38,8 +41,8 @@ const appRoutes: Routes =[
     InscriptionComponent,
     LoginComponent,
     LogementsComponent,
-    ManageAvailabilityComponent
-
+    ManageAvailabilityComponent,
+    DetailsLogementComponent
   ],
   imports: [
     AccordionModule.forRoot(), BsDatepickerModule.forRoot(), ImageUploadModule.forRoot(), InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
