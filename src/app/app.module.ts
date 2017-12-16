@@ -18,7 +18,6 @@ import { ProposerLogementsHoteComponent } from './proposer-logements-hote/propos
 import { ManageAvailabilityComponent } from './manage-availability/manage-availability.component';
 import { CalendrierService } from '../services/calendrier.service';
 import { DetailsLogementComponent } from './details-logement/details-logement.component';
-import { ResultatRechercheComponent } from './resultat-recherche/resultat-recherche.component';
 import {AuthManager} from '../services/authManager';
 import {AuthHoteManager} from '../services/authHoteManager';
 
@@ -46,7 +45,6 @@ const appRoutes: Routes =[
     LogementsComponent,
     ManageAvailabilityComponent,
     DetailsLogementComponent,
-    ResultatRechercheComponent
 
   ],
   

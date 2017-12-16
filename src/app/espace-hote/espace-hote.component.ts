@@ -17,6 +17,6 @@ export class EspaceHoteComponent implements OnInit {
   }
   
   doGetMyLogements(){
-
+    this.logementService.getLogementsByClientHote(JSON.parse(sessionStorage.getItem("currentUser")).id_client);
   };
 }

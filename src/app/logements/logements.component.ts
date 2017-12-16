@@ -14,52 +14,33 @@ import { Recherche } from '../../utils/utils.recherche';
 export class LogementsComponent implements OnInit {
   listLogement: Array<any> = null;
   currentpage:number=0;
-  size:number=4;
+  size:number=8;
   nbrpages:Array<number>;
   currentLogement:Logement;
-  mode:number;
+
+  @Input('mode') mode:number;
+
+  resultResearch: String ;
 
   @Input('recherche') recherche: Recherche;
-  @Input('fromRecherche') fromRecherche: Boolean;
-
-
-  @Output() getSearchStatus = new EventEmitter<Boolean>();
 
 
   constructor(public http:Http, public logementsService:LogementsServices) { 
     this.nbrpages= new Array(0);
-    this.mode = 0
+    
   }
   
   ngOnChanges(changes: SimpleChanges) {
-   if (this.fromRecherche) {
+   
+    this.mode = 0;
     this.doGetLogementsByVilleDateFromDateTo();
-
-  } else {
     
-    this.doGetAllLogements();
-    //from espace-hote getLogementByClient...
-  }
   } 
+
   ngOnInit() {
-    if (this.fromRecherche) {
       this.doGetLogementsByVilleDateFromDateTo();
 
-    } else {
-      
-      this.doGetAllLogements();
-      //from espace-hote getLogementByClient...
-    }
-
   }
-
-  doGetAllLogements(){
-    
-        this.logementsService.getLogements(this.currentpage,this.size)
-          .subscribe(data=>{this.listLogement=data.logemens;
-            this.nbrpages = new Array(data.total);
-          },err=>{console.log(err);})
-      }
 
   doGetLogementsByVilleDateFromDateTo(){
     
@@ -69,11 +50,9 @@ export class LogementsComponent implements OnInit {
                 this.nbrpages = new Array(data.total);
                 //to notify parent recherche-result 
                 if (this.listLogement.length > 0) {
-                  
-                this.getSearchStatus.emit(true);
+                  this.resultResearch= data.totalLogement +" logements ont était trouvé à " + this.recherche.villeRecherche
                 }else{
-                  
-                this.getSearchStatus.emit(false);
+                  this.resultResearch= "Aucun résultat trouvé"
                 }
               },err=>{
                 console.log(err);
@@ -85,7 +64,7 @@ export class LogementsComponent implements OnInit {
 
   gotoPage(i:number){
     this.currentpage=i;
-    this.doGetAllLogements();
+    this.doGetLogementsByVilleDateFromDateTo();
 
   }
 
