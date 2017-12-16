@@ -1,0 +1,74 @@
+<!--<h3>Comparateur contient {{list_log.length}} éléments</h3>-->
+<div class="container-fluid">
+  <div class="table-responsive">
+    <table class="table table-striped table-responsive">
+      <thead>
+        <tr>
+            <th class="col-sm-2">Logement</th>
+          <th *ngFor="let l of list_log; let i = index" class="col-sm-2 ">
+              <div>
+                <button type="button" class="close" >&times;</button>
+              </div>
+            N°{{i+1}} : <a class="clickable">{{l.titre| slice:0:27}}...</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+       <tr>
+            <td>Images</td>
+            <td class="text-center" *ngFor="let l of list_log; let i = index">
+
+              <img src="/assets/img/salon.jpg" alt="cheesecake" class="module-card-img" width="200" height="150"/><br> <br>
+
+              <button type="button" class="btn btn-danger btn-sm ">
+                <span class="glyphicon glyphicon-shopping-cart"></span> Ajouter au Panier
+              </button>
+
+            </td>
+        </tr>
+
+       <tr>
+         <td>Proposé par : </td>
+         <td *ngFor="let l of list_log; let i = index">{{l.client}}</td>
+       </tr>
+
+       <tr>
+         <td>Ville : </td>
+         <td class="text-center" *ngFor="let l of list_log; let i = index">{{l.ville}}</td>
+       </tr>
+
+       <tr>
+         <td>Descritpion : </td>
+         <td class="text-center" *ngFor="let l of list_log; let i = index">{{l.description | slice:0:68}}...</td>
+       </tr>
+
+       <tr>
+         <td>Equipement : </td>
+         <td class="text-center" *ngFor="let l of list_log; let i = index">
+               <span [ngClass]="(findid(8,l.equipements))?'class1':'class2'" >WIFI</span>
+               <span [ngClass]="(findid(8,l.equipements))?'class1':'class2'" >Produits de Base</span>
+               <span [ngClass]="(findid(2,l.equipements))?'class1':'class2'" >Télévision</span>
+               <span [ngClass]="(findid(8,l.equipements))?'class1':'class2'" >Chaufage</span>
+               <span [ngClass]="(findid(8,l.equipements))?'class1':'class2'" >Climatisation</span>
+         </td>
+       </tr>
+
+       <tr>
+         <td>Nombre de chambres : </td>
+         <td class="text-center" *ngFor="let l of list_log; let i = index">{{l.nbr_chamber}}</td>
+       </tr>
+
+       <tr>
+         <td>Nombre de salle de bains : </td>
+         <td class="text-center" *ngFor="let l of list_log; let i = index">{{l.nbr_salle_bain}}</td>
+       </tr>
+
+       <tr>
+         <td>Prix :  </td>
+         <td class="text-center" *ngFor="let l of list_log; let i = index">{{l.prix}} <i class="fa fa-eur" aria-hidden="true"></i> </td>
+       </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>

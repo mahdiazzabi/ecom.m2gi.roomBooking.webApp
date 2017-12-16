@@ -18,6 +18,8 @@ import { ProposerLogementsHoteComponent } from './proposer-logements-hote/propos
 import { ManageAvailabilityComponent } from './manage-availability/manage-availability.component';
 import { CalendrierService } from '../services/calendrier.service';
 import { ResultatRechercheComponent } from './resultat-recherche/resultat-recherche.component';
+import { ComparateurComponent } from './comparateur/comparateur.component';
+import { PanierComponent } from './panier/panier.component';
 
 const appRoutes: Routes =[
   {path :'recherche' , component : RechercheLogementComponent},
@@ -27,6 +29,8 @@ const appRoutes: Routes =[
   {path :'EspaceHote' , component : EspaceHoteComponent},
   {path:"logements", component:LogementsComponent},
   {path :'ProposerLogement' , component : ProposerLogementsHoteComponent},
+  {path :'comparateur' , component : ComparateurComponent},
+  {path :'panier' , component : PanierComponent},
   {path :'disponibilite' , component : ManageAvailabilityComponent}
 ]
 @NgModule({
@@ -40,10 +44,12 @@ const appRoutes: Routes =[
     LoginComponent,
     LogementsComponent,
     ManageAvailabilityComponent,
-    ResultatRechercheComponent
+    ResultatRechercheComponent,
+    ComparateurComponent,
+    PanierComponent
 
   ],
-  
+
   imports: [
     AccordionModule.forRoot(), BsDatepickerModule.forRoot(), ImageUploadModule.forRoot(), InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
     BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule,HttpModule
