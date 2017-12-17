@@ -17,7 +17,26 @@ export class DetailsLogementComponent implements OnInit {
   sendMode(m : number){
     this.OTP.emit(m);
   }
-  
+
+  AddToCart(log:Logement){
+    let tab_logs:Logement[]= JSON.parse(localStorage.getItem("panier_array_logs"));
+    if (tab_logs){
+
+      if (tab_logs.find(x => x.id_logement == log.id_logement)){
+        alert("Vous avez déja ajouter ce logement à votre panier!");
+      }
+      else
+      {
+        tab_logs.push(log);
+        localStorage.setItem("panier_array_logs",JSON.stringify(tab_logs));
+      }
+
+    }else {
+      let tab_logs:Logement[] = [log] ;
+      localStorage.setItem("panier_array_logs",JSON.stringify(tab_logs));
+    }
+  }
+
   constructor( public logementService:LogementsServices, public route:ActivatedRoute) { }
 
   ngOnInit() {
@@ -26,5 +45,8 @@ export class DetailsLogementComponent implements OnInit {
     //this.logement=this.route.snapshot.params['logement'];
     console.log(this.logement);
   }
+
+
+
 
 }

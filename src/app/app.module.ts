@@ -17,9 +17,13 @@ import { LogementsServices } from '../services/logements.service';
 import { ProposerLogementsHoteComponent } from './proposer-logements-hote/proposer-logements-hote.component';
 import { ManageAvailabilityComponent } from './manage-availability/manage-availability.component';
 import { CalendrierService } from '../services/calendrier.service';
+import { ComparateurComponent } from './comparateur/comparateur.component';
+import { PanierComponent } from './panier/panier.component';
 import { DetailsLogementComponent } from './details-logement/details-logement.component';
 import {AuthManager} from '../services/authManager';
 import {AuthHoteManager} from '../services/authHoteManager';
+import {EquipementService} from "../services/equipement.service";
+
 
 const appRoutes: Routes =[
   {path :'recherche' , component : RechercheLogementComponent},
@@ -29,8 +33,12 @@ const appRoutes: Routes =[
   {path :'EspaceHote' , component : EspaceHoteComponent , canActivate : [AuthHoteManager]},
   {path:"logements", component:LogementsComponent},
   {path :'ProposerLogement' , component : ProposerLogementsHoteComponent},
+  {path :'comparateur' , component : ComparateurComponent},
+  {path :'panier' , component : PanierComponent},
+  {path :'disponibilite' , component : ManageAvailabilityComponent},
   {path :'disponibilite' , component : ManageAvailabilityComponent},
   {path:"detailsLogement", component : DetailsLogementComponent},
+
 
 ]
 @NgModule({
@@ -44,15 +52,17 @@ const appRoutes: Routes =[
     LoginComponent,
     LogementsComponent,
     ManageAvailabilityComponent,
+    ComparateurComponent,
+    PanierComponent,
     DetailsLogementComponent,
 
   ],
-  
+
   imports: [
     AccordionModule.forRoot(), BsDatepickerModule.forRoot(), ImageUploadModule.forRoot(), InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
     BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule,HttpModule
   ],
-  providers: [ClientService, LogementsServices, CalendrierService ,AuthManager , AuthHoteManager],
+  providers: [ClientService, LogementsServices, CalendrierService ,AuthManager , AuthHoteManager,EquipementService],
   bootstrap: [AppComponent]
 })
 

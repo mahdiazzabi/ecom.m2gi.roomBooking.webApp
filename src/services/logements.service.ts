@@ -9,12 +9,17 @@ export class LogementsServices{
   constructor(public http:Http){
 
   }
-  
+
   getLogements(page:number, size:number){
     return this.http.get("http://localhost:8080/RoomBookingWeb/pagelogement/"+page+"/"+size)
       .map((resp)=>resp.json());
 
   }
+
+  getAllLogements(){
+    return this.http.get("http://localhost:8080/RoomBookingWeb/logements").map((resp)=>resp.json());
+  }
+
   getLogement(id:number){
      return this.http.get("http://localhost:8080/RoomBookingWeb/logement/"+id)
      .map((resp)=>resp.json());
@@ -36,9 +41,9 @@ export class LogementsServices{
       return {err: null, logement: body };
         }
       );
-  } 
+  }
 
-  
+
 }
 export interface LogementResponse {
   err: any;

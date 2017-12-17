@@ -26,9 +26,9 @@
             </div>
     </div>
     <div class="top marLeft">
-            <div class="panel  sous-titre">Description :</div>  
+            <div class="panel  sous-titre">Description :</div>
               <div class="form-group">
-                      <p class="foo">{{logement.description}}  </p>   
+                      <p class="foo">{{logement.description}}  </p>
               </div>
       </div>
     <div class=" top marLeft">
@@ -51,10 +51,10 @@
                 <img src="assets/img/price.png">
                 <label>{{logement.prix}} € <small> par nuit</small></label>
                 <button type="button" class="btn btn-primary marLeft2" (click)="sendMode(0)" >Retour</button>
-                <button type="button" class="btn btn-info " (click)="sendMode(0)" >Ajouter au Panier</button>
-                <button type="button" class="btn btn-success " (click)="sendMode(0)" >Réserver</button>      
+                <button type="button" class="btn btn-info " (click)="AddToCart(logement)">Ajouter au Panier</button>
+                <button type="button" class="btn btn-success " (click)="sendMode(0)" >Réserver</button>
         </div>
- 
+
     </div>
   </div>
 </div>

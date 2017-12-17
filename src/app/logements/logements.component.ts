@@ -25,17 +25,17 @@ export class LogementsComponent implements OnInit {
   @Input('recherche') recherche: Recherche;
 
 
-  constructor(public http:Http, public logementsService:LogementsServices) { 
+  constructor(public http:Http, public logementsService:LogementsServices) {
     this.nbrpages= new Array(0);
-    
+
   }
-  
+
   ngOnChanges(changes: SimpleChanges) {
-   
+
     this.mode = 0;
     this.doGetLogementsByVilleDateFromDateTo();
-    
-  } 
+
+  }
 
   ngOnInit() {
       this.doGetLogementsByVilleDateFromDateTo();
@@ -43,12 +43,12 @@ export class LogementsComponent implements OnInit {
   }
 
   doGetLogementsByVilleDateFromDateTo(){
-    
+
             this.logementsService.getLogementsByRecherche(this.currentpage,this.size,this.recherche)
               .subscribe(data=>{
                 this.listLogement=data.logemens;
                 this.nbrpages = new Array(data.total);
-                //to notify parent recherche-result 
+                //to notify parent recherche-result
                 if (this.listLogement.length > 0) {
                   this.resultResearch= data.totalLogement +" logements ont était trouvé à " + this.recherche.villeRecherche
                 }else{
@@ -56,7 +56,7 @@ export class LogementsComponent implements OnInit {
                 }
               },err=>{
                 console.log(err);
-                //to notify parent recherche-result 
+                //to notify parent recherche-result
               })
           }
 
@@ -79,6 +79,23 @@ export class LogementsComponent implements OnInit {
   getValueMode(m : number){
        this.mode=m;
     // console.log(this.mode);
+  }
+
+  AddToComparateur(log:Logement){
+    let tab_logs:Logement[]= JSON.parse(localStorage.getItem("Comparateur_array_logs"));
+    if (tab_logs){
+      if (tab_logs.find(x => x.id_logement == log.id_logement)){
+        alert("Vous avez déja ajouter ce logement au Comparateur!");
+      }
+      else
+      {
+        tab_logs.push(log);
+        localStorage.setItem("Comparateur_array_logs",JSON.stringify(tab_logs));
+      }
+    }else {
+      let tab_logs:Logement[] = [log] ;
+      localStorage.setItem("Comparateur_array_logs",JSON.stringify(tab_logs));
+    }
   }
 
 }

@@ -1,0 +1,48 @@
+<div class="container">
+  <table id="cart0" class="table table-hover table-condensed">
+    <thead>
+    <tr>
+      <th style="width:45%">Logement</th>
+      <th style="width:15%">Où</th>
+      <th style="width:8%">Chez qui</th>
+      <th style="width:22%" class="text-center">Prix</th>
+      <th style="width:10%"></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let c of get_logement(); let i = index">
+      <td data-th="Product">
+        <div class="row">
+          <div class="col-sm-2 hidden-xs"><img src="/assets/img/salon.jpg" class="img-responsive"/></div>
+          <div class="col-sm-10">
+            <h4 class="nomargin"> Logement N° {{i+1}}</h4>
+            <p>{{c.titre}}</p>
+          </div>
+        </div>
+      </td>
+      <td data-th="ville">
+        {{c.ville}}
+      </td>
+      <td data-th="client">
+        {{c.client}}
+      </td>
+
+      <td data-th="Prix" class="text-center">{{c.prix}}€</td>
+
+      <td>
+        <button (click)="delete_logement(i)" class="btn btn-danger btn-sm" data-toggle="confirmation"><i class="fa fa-trash-o"></i></button>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td><a href="/recherche" class="btn btn-warning"><i class="fa fa-angle-left"></i> Autre recherche </a></td>
+      <td colspan="2" class="hidden-xs"></td>
+      <td class="hidden-xs text-center"><strong>Total {{get_total()}} €</strong></td>
+      <td><a class="btn btn-success btn-block">Payer <i class="fa fa-angle-right"></i></a></td>
+    </tr>
+    </tfoot>
+  </table>
+
+</div>
