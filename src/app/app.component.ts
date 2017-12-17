@@ -42,6 +42,7 @@ export class AppComponent implements OnInit , OnDestroy{
 
   logOut(){
     sessionStorage.clear();
+    localStorage.clear();
     this.clientService.logOut() ;
     this.router.navigate(['/recherche']);
   }
