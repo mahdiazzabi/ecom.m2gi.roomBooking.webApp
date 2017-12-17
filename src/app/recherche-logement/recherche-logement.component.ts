@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { Recherche } from '../../utils/utils.recherche';
-import {ResultatRechercheComponent} from '../resultat-recherche/resultat-recherche.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import * as moment from 'moment';
@@ -13,11 +12,11 @@ import * as moment from 'moment';
 export class RechercheLogementComponent implements OnInit {
   recherche: Recherche ;
   public RechercheForm: FormGroup;
-  fromRecherche: Boolean ;
+  doResearchNow: Boolean ;
   constructor(private fb: FormBuilder ) {
     this.recherche = new Recherche();
     this.initRechercheForm();
-    this.fromRecherche = false ;
+    this.doResearchNow = false ;
    }
  
    public initRechercheForm() {
@@ -45,7 +44,6 @@ export class RechercheLogementComponent implements OnInit {
     this.recherche.dateFin = this.RechercheForm.get('dateTo').value;
     this.recherche.villeRecherche = this.RechercheForm.get('ville').value;
     this.recherche.nbrVoyageur = this.RechercheForm.get('nbrVoyageur').value;
-    this.fromRecherche = true ;
-
+    this.doResearchNow = true ;
   }
 }

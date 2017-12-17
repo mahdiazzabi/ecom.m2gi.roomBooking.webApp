@@ -6,24 +6,15 @@
     <ul class="nav navbar-nav "style="margin-left: 5%;">
 
       <li *ngIf="isLoggedIn && !currentClient.isHote"><a routerLink="/ProposerLogement">Devenir Hôte</a></li>
+      <li *ngIf="isLoggedIn && currentClient.isHote" ><a routerLink="/EspaceHote">Mon Espace Hôte</a></li>
 
 
-        <li class="dropdown">
-          <a *ngIf="isLoggedIn && currentClient.isHote " class="dropdown-toggle" data-toggle="dropdown" routerLink="/EspaceHote">Espace Hôte
-            <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a routerLink="/EspaceHote">Mes logements</a></li>
-            <li><a routerLink="/ProposerLogement">Proposer un logement</a></li>
-          </ul>
-        </li>
 
     </ul>
 
-
-
     <ul class="nav navbar-nav navbar-right">
       <li><a class="clickable" routerLink="/comparateur"><i class="glyphicon glyphicon-tags"></i> Comparateur <span class="badge">0</span></a></li>
-      <li><a routerLink="/panier" id="cart" class="clickable"><i class="fa fa-shopping-cart"></i> Panier <span class="badge">0</span></a></li>
+      <li><a routerLink="/panier" id="cart" [ngClass]="(get_total_element_panier()==0)?'disabled':'clickable'" class="clickable"><i class="fa fa-shopping-cart"></i> Panier <span class="badge">{{get_total_element_panier()}}</span></a></li>
       <li><a *ngIf="!isLoggedIn" routerLink="/inscription"><span class="glyphicon glyphicon-user"></span> S'inscrire</a></li>
       <li><a *ngIf="!isLoggedIn" routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Se connecter </a></li>
       <li><a *ngIf="isLoggedIn"  (click)="logOut()"><span class="glyphicon glyphicon-log-in"></span> Se déconnecter </a></li>

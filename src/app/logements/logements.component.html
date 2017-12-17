@@ -1,4 +1,6 @@
-<div class="module-card-wrap">
+<div *ngIf="mode==0">
+  <h2> {{resultResearch}}</h2>
+<div class="module-card-wrap" >
   <div class="module-card" *ngFor="let c of listLogement">
     <div class="module-card-bottom">
       <img src="/assets/img/salon.jpg" alt="cheesecake" class="module-card-img"/>
@@ -20,14 +22,14 @@
       <div>
         <p >{{c.description | slice:0:68}}...</p>
       </div>
-      <button class="module-card-button">See More</button>
+      <button class="module-card-button clickable" (click)="getLogement(c,1)">See More</button>
     </div>
 
   </div>
 
 </div> <!-- /module-card-wrap -->
 
-<div class="container pagination bar-pagination">
+<div class="container pagination bar-pagination" >
   <ul class="nav nav-pills center ">
     <li >
       <a [ngClass]="{'btn disabled':currentpage==0}" class="clickable" (click)="gotoPage(currentpage-1)">&laquo;</a>
@@ -41,3 +43,6 @@
     </li>
   </ul>
 </div>
+</div>
+
+<app-details-logement *ngIf="mode==1" [currentLogement]="currentLogement" (OTP)="getValueMode($event)"></app-details-logement>

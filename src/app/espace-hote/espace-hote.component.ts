@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LogementsServices } from '../../services/logements.service';
 
 @Component({
   selector: 'app-espace-hote',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EspaceHoteComponent implements OnInit {
 
-  constructor() { }
+  listLogement: Array<any> = null;
+
+  constructor(private logementService : LogementsServices) { }
 
   ngOnInit() {
+    this.doGetMyLogements();
   }
-
+  
+  doGetMyLogements(){
+    this.logementService.getLogementsByClientHote(JSON.parse(sessionStorage.getItem("currentUser")).id_client);
+  };
 }

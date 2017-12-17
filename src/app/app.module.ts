@@ -17,21 +17,29 @@ import { LogementsServices } from '../services/logements.service';
 import { ProposerLogementsHoteComponent } from './proposer-logements-hote/proposer-logements-hote.component';
 import { ManageAvailabilityComponent } from './manage-availability/manage-availability.component';
 import { CalendrierService } from '../services/calendrier.service';
-import { ResultatRechercheComponent } from './resultat-recherche/resultat-recherche.component';
 import { ComparateurComponent } from './comparateur/comparateur.component';
 import { PanierComponent } from './panier/panier.component';
+import { DetailsLogementComponent } from './details-logement/details-logement.component';
+import {AuthManager} from '../services/authManager';
+import {AuthHoteManager} from '../services/authHoteManager';
+import {EquipementService} from "../services/equipement.service";
+
 
 const appRoutes: Routes =[
   {path :'recherche' , component : RechercheLogementComponent},
   {path :'inscription' , component : InscriptionComponent},
   {path :'' , redirectTo:'/recherche' , pathMatch : 'full'},
   {path :'login' , component : LoginComponent},
-  {path :'EspaceHote' , component : EspaceHoteComponent},
+  {path :'EspaceHote' , component : EspaceHoteComponent , canActivate : [AuthHoteManager]},
   {path:"logements", component:LogementsComponent},
   {path :'ProposerLogement' , component : ProposerLogementsHoteComponent},
   {path :'comparateur' , component : ComparateurComponent},
   {path :'panier' , component : PanierComponent},
-  {path :'disponibilite' , component : ManageAvailabilityComponent}
+  {path :'disponibilite' , component : ManageAvailabilityComponent},
+  {path :'disponibilite' , component : ManageAvailabilityComponent},
+  {path:"detailsLogement", component : DetailsLogementComponent},
+
+
 ]
 @NgModule({
   declarations: [
@@ -44,9 +52,9 @@ const appRoutes: Routes =[
     LoginComponent,
     LogementsComponent,
     ManageAvailabilityComponent,
-    ResultatRechercheComponent,
     ComparateurComponent,
-    PanierComponent
+    PanierComponent,
+    DetailsLogementComponent,
 
   ],
 
@@ -54,7 +62,7 @@ const appRoutes: Routes =[
     AccordionModule.forRoot(), BsDatepickerModule.forRoot(), ImageUploadModule.forRoot(), InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
     BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule,HttpModule
   ],
-  providers: [ClientService, LogementsServices, CalendrierService],
+  providers: [ClientService, LogementsServices, CalendrierService ,AuthManager , AuthHoteManager,EquipementService],
   bootstrap: [AppComponent]
 })
 

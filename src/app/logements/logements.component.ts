@@ -1,3 +1,6 @@
+
+import { Logement } from '../../model/model.logement';
+import { Router } from '@angular/router';
 import { Component, OnInit ,Input, SimpleChanges, SimpleChange, Output, EventEmitter} from '@angular/core';
 import {Http} from "@angular/http";
 import { LogementsServices } from '../../services/logements.service';
@@ -11,74 +14,71 @@ import { Recherche } from '../../utils/utils.recherche';
 export class LogementsComponent implements OnInit {
   listLogement: Array<any> = null;
   currentpage:number=0;
-  size:number=20;
+  size:number=8;
   nbrpages:Array<number>;
+  currentLogement:Logement;
+
+  @Input('mode') mode:number;
+
+  resultResearch: String ;
 
   @Input('recherche') recherche: Recherche;
-  @Input('fromRecherche') fromRecherche: Boolean;
 
 
-  @Input('getSearchStatus') getSearchStatus: Boolean;
-  @Output() getSearchStatusChange = new EventEmitter<boolean>();
-
-
-  constructor(public http:Http, public logementsdervice:LogementsServices) { 
+  constructor(public http:Http, public logementsService:LogementsServices) {
     this.nbrpages= new Array(0);
+
   }
-  
+
   ngOnChanges(changes: SimpleChanges) {
-   if (this.fromRecherche) {
+
+    this.mode = 0;
     this.doGetLogementsByVilleDateFromDateTo();
 
-  } else {
-    
-    this.doGetAllLogements();
-    //from espace-hote getLogementByClient...
   }
-  }
-  
+
   ngOnInit() {
-    if (this.fromRecherche) {
       this.doGetLogementsByVilleDateFromDateTo();
 
-    } else {
-      
-      this.doGetAllLogements();
-      //from espace-hote getLogementByClient...
-    }
-
   }
 
-  doGetAllLogements(){
-    
-        this.logementsdervice.getLogements(this.currentpage,this.size)
-          .subscribe(data=>{this.listLogement=data.logemens;
-            this.nbrpages = new Array(data.total);
-            this.getSearchStatus = true ;   
-          },err=>{console.log(err);})
-      }
-
   doGetLogementsByVilleDateFromDateTo(){
-    
-            this.logementsdervice.getLogementsByRecherche(this.currentpage,this.size,this.recherche)
+
+            this.logementsService.getLogementsByRecherche(this.currentpage,this.size,this.recherche)
               .subscribe(data=>{
                 this.listLogement=data.logemens;
                 this.nbrpages = new Array(data.total);
-                this.getSearchStatus = true ;  
-                //to notify parent recherche-result 
-                this.getSearchStatusChange.emit(true);
+                //to notify parent recherche-result
+                if (this.listLogement.length > 0) {
+                  this.resultResearch= data.totalLogement +" logements ont était trouvé à " + this.recherche.villeRecherche
+                }else{
+                  this.resultResearch= "Aucun résultat trouvé"
+                }
               },err=>{
                 console.log(err);
-                this.getSearchStatus = false ;  
-                //to notify parent recherche-result 
-                this.getSearchStatusChange.emit(false);
+                //to notify parent recherche-result
               })
           }
 
+
+
   gotoPage(i:number){
     this.currentpage=i;
-    this.doGetAllLogements();
+    this.doGetLogementsByVilleDateFromDateTo();
 
+  }
+
+  getLogement(logement:Logement,m:number){
+    console.log(logement);
+    this.currentLogement=logement;
+    this.mode=m;
+    //this.router.navigate(['detailsLogement',mode]);
+
+  }
+
+  getValueMode(m : number){
+       this.mode=m;
+    // console.log(this.mode);
   }
 
 }

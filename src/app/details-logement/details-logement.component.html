@@ -1,0 +1,60 @@
+<div class="panel">
+  <div class="panel-body">
+      <div class="bott">
+    <div class="middle">
+          <img src="/assets/img/salon.jpg"  width="80%" height="350" />
+    </div>
+    <div class="spacer marLeft">
+      <label class="titre">  {{logement.titre}}</label>
+      <div>
+            <img src="assets/img/ville.png">
+            <label>{{logement.ville}}</label>
+        </div>
+    </div>
+    <div class="panel panel-secondary top marLeft">
+            <div class="form-group">
+                    <img src="assets/img/traveler.png">
+                    <label class="fnt">{{logement.nbt_voyageurs}}   voyageurs</label>
+            </div>
+            <div class="form-group">
+                    <img src="assets/img/room.png">
+                    <label class="fnt">{{logement.nbr_chamber}}   chambres</label>
+            </div>
+            <div class="form-group">
+                    <img src="assets/img/bathroom.png">
+                    <label class="fnt">{{logement.nbr_salle_bain}}   salles de bain</label>
+            </div>
+    </div>
+    <div class="top marLeft">
+            <div class="panel  sous-titre">Description :</div>
+              <div class="form-group">
+                      <p class="foo">{{logement.description}}  </p>
+              </div>
+      </div>
+    <div class=" top marLeft">
+          <div class="panel  sous-titre">L'adresse du logement : </div>
+            <div class="form-group">
+                <label class="fnt">{{logement.adresse}}</label>
+            </div>
+            <div class="form-group fnt">
+                    <label>{{logement.code_postal}},  </label>
+                    <label>{{logement.ville}}</label>
+            </div>
+    </div>
+    <div class="top marLeft">
+            <div class="panel sous-titre">Annulation : </div>
+        <p class="foo">Si vous annulez jusqu'à 7 jours avant l'arrivée, vous recevez un remboursement à hauteur de 50 %. En cas d'annulation dans les 7 jours précédant votre voyage, la réservation n'est pas remboursable. Les frais de service sont remboursés lorsque l'annulation a lieu avant l'arrivée.</p>
+    </div>
+    </div>
+    <div class="foot">
+        <div class="form-group marLeft1 top1">
+                <img src="assets/img/price.png">
+                <label>{{logement.prix}} € <small> par nuit</small></label>
+                <button type="button" class="btn btn-primary marLeft2" (click)="sendMode(0)" >Retour</button>
+                <button type="button" class="btn btn-info " (click)="AddToCart(logement)">Ajouter au Panier</button>
+                <button type="button" class="btn btn-success " (click)="sendMode(0)" >Réserver</button>
+        </div>
+
+    </div>
+  </div>
+</div>

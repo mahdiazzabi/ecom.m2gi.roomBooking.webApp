@@ -1,4 +1,9 @@
 export class Equipement{
-  id_equipement?:number;
-  titre:String;
+  id_equip?:number;
+  nom_equipement?:String;
+
+  constructor(id:number)
+  {
+    this.id_equip = id;
+  }
 }

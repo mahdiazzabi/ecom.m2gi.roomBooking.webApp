@@ -2,6 +2,9 @@
   margin-left: 2%;
   margin-top: 0.8%;
 }
-
+.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+}
 
 
