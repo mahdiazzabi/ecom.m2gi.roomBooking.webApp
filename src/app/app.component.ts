@@ -58,4 +58,14 @@ export class AppComponent implements OnInit , OnDestroy{
       }
   }
 
+  get_total_element_Comparateur():number{
+    let liste_logs:Logement[]= JSON.parse(localStorage.getItem("Comparateur_array_logs"));
+ /*   if (liste_logs)
+    {*/
+      return liste_logs.length;
+    /*}else{
+      return 0;
+    }*/
+  }
+
 }

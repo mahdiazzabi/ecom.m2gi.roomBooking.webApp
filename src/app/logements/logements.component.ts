@@ -81,4 +81,21 @@ export class LogementsComponent implements OnInit {
     // console.log(this.mode);
   }
 
+  AddToComparateur(log:Logement){
+    let tab_logs:Logement[]= JSON.parse(localStorage.getItem("Comparateur_array_logs"));
+    if (tab_logs){
+      if (tab_logs.find(x => x.id_logement == log.id_logement)){
+        alert("Vous avez déja ajouter ce logement au Comparateur!");
+      }
+      else
+      {
+        tab_logs.push(log);
+        localStorage.setItem("Comparateur_array_logs",JSON.stringify(tab_logs));
+      }
+    }else {
+      let tab_logs:Logement[] = [log] ;
+      localStorage.setItem("Comparateur_array_logs",JSON.stringify(tab_logs));
+    }
+  }
+
 }

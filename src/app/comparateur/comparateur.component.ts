@@ -9,18 +9,18 @@ import {Equipement} from "../../model/model.equipement";
 })
 export class ComparateurComponent implements OnInit {
   log:Logement;
-  equips:Equipement[]=[{"id_equip":1,"nom_equipement":"WIFI"},
-    {"id_equip":2,"nom_equipement":"Produits de Base"},
+  equips:Equipement[]=[{"id_equip":1,"nom_equipement":"Produits de Base"},
+    {"id_equip":2,"nom_equipement":"Wifi"},
     {"id_equip":3,"nom_equipement":"Télévision"},
-    {"id_equip":4,"nom_equipement":"Climatisation"},
-    {"id_equip":5,"nom_equipement":"Chaufage"}
+    {"id_equip":4,"nom_equipement":"Chauffage"},
+    {"id_equip":5,"nom_equipement":"Climatisation"}
     ];
 
   list_log:Logement[];
 
 
   constructor() {
-    this.list_log = [{"titre":"Magnifique maison en bambou au bord du fleuve","ville":"Agadir","code_postal":"ffefef","adresse":"rue01","nbt_voyageurs":0,
+   /* this.list_log = [{"titre":"Magnifique maison en bambou au bord du fleuve","ville":"Agadir","code_postal":"ffefef","adresse":"rue01","nbt_voyageurs":0,
       "nbr_chamber":54,
       "nbr_salle_bain":5,
       "prix":25,
@@ -50,16 +50,17 @@ export class ComparateurComponent implements OnInit {
         "description":"ffff",
         "client":null,
         "equipements":this.equips}
-        ]
+        ]*/
   }
 
   ngOnInit() {
     //this.findid(8);
+    this.get_logement()
   }
 
   get_logement():Logement[]
   {
-    let tab_logs:Logement[]= JSON.parse(localStorage.getItem("comparateur_array_logs"));
+    let tab_logs:Logement[]= JSON.parse(localStorage.getItem("Comparateur_array_logs"));
     return tab_logs;
   }
 
@@ -78,8 +79,29 @@ export class ComparateurComponent implements OnInit {
   {
     let liste_logs:Logement[]=this.get_logement();
     liste_logs.splice(i,1);
-    localStorage.setItem("comparateur_array_logs",JSON.stringify(liste_logs));
+    localStorage.setItem("Comparateur_array_logs",JSON.stringify(liste_logs));
   }
+
+
+  AddToCart(log:Logement){
+    let tab_logs:Logement[]= JSON.parse(localStorage.getItem("panier_array_logs"));
+    if (tab_logs){
+
+      if (tab_logs.find(x => x.id_logement == log.id_logement)){
+        alert("Vous avez déja ajouter ce logement à votre panier!");
+      }
+      else
+      {
+        tab_logs.push(log);
+        localStorage.setItem("panier_array_logs",JSON.stringify(tab_logs));
+      }
+
+    }else {
+      let tab_logs:Logement[] = [log] ;
+      localStorage.setItem("panier_array_logs",JSON.stringify(tab_logs));
+    }
+  }
+
 
 
 

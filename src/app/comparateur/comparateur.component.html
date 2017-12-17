@@ -5,9 +5,9 @@
       <thead>
         <tr>
             <th class="col-sm-2">Logement</th>
-          <th *ngFor="let l of list_log; let i = index" class="col-sm-2 ">
+          <th *ngFor="let l of get_logement(); let i = index" class="col-sm-2 ">
               <div>
-                <button type="button" class="close" >&times;</button>
+                <button type="button" class="close" (click)="delete_logement(i)">&times;</button>
               </div>
             N°{{i+1}} : <a class="clickable">{{l.titre| slice:0:27}}...</a>
           </th>
@@ -16,11 +16,11 @@
       <tbody>
        <tr>
             <td>Images</td>
-            <td class="text-center" *ngFor="let l of list_log; let i = index">
+            <td class="text-center" *ngFor="let l of get_logement(); let i = index">
 
               <img src="/assets/img/salon.jpg" alt="cheesecake" class="module-card-img" width="200" height="150"/><br> <br>
 
-              <button type="button" class="btn btn-danger btn-sm ">
+              <button type="button" class="btn btn-danger btn-sm " (click)="AddToCart(l)" >
                 <span class="glyphicon glyphicon-shopping-cart"></span> Ajouter au Panier
               </button>
 
@@ -29,43 +29,43 @@
 
        <tr>
          <td>Proposé par : </td>
-         <td *ngFor="let l of list_log; let i = index">{{l.client}}</td>
+         <td *ngFor="let l of get_logement(); let i = index">{{l.client}}</td>
        </tr>
 
        <tr>
          <td>Ville : </td>
-         <td class="text-center" *ngFor="let l of list_log; let i = index">{{l.ville}}</td>
+         <td class="text-center" *ngFor="let l of get_logement(); let i = index">{{l.ville}}</td>
        </tr>
 
        <tr>
          <td>Descritpion : </td>
-         <td class="text-center" *ngFor="let l of list_log; let i = index">{{l.description | slice:0:68}}...</td>
+         <td class="text-center" *ngFor="let l of get_logement(); let i = index">{{l.description | slice:0:68}}...</td>
        </tr>
 
        <tr>
          <td>Equipement : </td>
-         <td class="text-center" *ngFor="let l of list_log; let i = index">
-               <span [ngClass]="(findid(8,l.equipements))?'class1':'class2'" >WIFI</span>
-               <span [ngClass]="(findid(8,l.equipements))?'class1':'class2'" >Produits de Base</span>
-               <span [ngClass]="(findid(2,l.equipements))?'class1':'class2'" >Télévision</span>
-               <span [ngClass]="(findid(8,l.equipements))?'class1':'class2'" >Chaufage</span>
-               <span [ngClass]="(findid(8,l.equipements))?'class1':'class2'" >Climatisation</span>
+         <td class="text-center" *ngFor="let l of get_logement(); let i = index">
+               <span [ngClass]="(findid(1,l.equipements))?'class1':'class2'" >Produits de Base</span>
+               <span [ngClass]="(findid(2,l.equipements))?'class1':'class2'" >WIFI</span>
+               <span [ngClass]="(findid(3,l.equipements))?'class1':'class2'" >Télévision</span>
+               <span [ngClass]="(findid(4,l.equipements))?'class1':'class2'" >Chauffage</span>
+               <span [ngClass]="(findid(5,l.equipements))?'class1':'class2'" >Climatisation</span>
          </td>
        </tr>
 
        <tr>
          <td>Nombre de chambres : </td>
-         <td class="text-center" *ngFor="let l of list_log; let i = index">{{l.nbr_chamber}}</td>
+         <td class="text-center" *ngFor="let l of get_logement(); let i = index">{{l.nbr_chamber}}</td>
        </tr>
 
        <tr>
          <td>Nombre de salle de bains : </td>
-         <td class="text-center" *ngFor="let l of list_log; let i = index">{{l.nbr_salle_bain}}</td>
+         <td class="text-center" *ngFor="let l of get_logement(); let i = index">{{l.nbr_salle_bain}}</td>
        </tr>
 
        <tr>
          <td>Prix :  </td>
-         <td class="text-center" *ngFor="let l of list_log; let i = index">{{l.prix}} <i class="fa fa-eur" aria-hidden="true"></i> </td>
+         <td class="text-center" *ngFor="let l of get_logement(); let i = index">{{l.prix}} <i class="fa fa-eur" aria-hidden="true"></i> </td>
        </tr>
       </tbody>
     </table>
