@@ -19,6 +19,7 @@ import { ManageAvailabilityComponent } from './manage-availability/manage-availa
 import { CalendrierService } from '../services/calendrier.service';
 import { ComparateurComponent } from './comparateur/comparateur.component';
 import { PanierComponent } from './panier/panier.component';
+import { ReservationComponent } from './reservation/reservation.component';
 import { DetailsLogementComponent } from './details-logement/details-logement.component';
 import {AuthManager} from '../services/authManager';
 import {AuthHoteManager} from '../services/authHoteManager';
@@ -36,6 +37,7 @@ const appRoutes: Routes =[
   {path :'comparateur' , component : ComparateurComponent},
   {path :'panier' , component : PanierComponent},
   {path :'disponibilite' , component : ManageAvailabilityComponent},
+  {path :'reservation' , component : ReservationComponent},
   {path :'disponibilite' , component : ManageAvailabilityComponent},
   {path:"detailsLogement", component : DetailsLogementComponent},
 
@@ -55,6 +57,7 @@ const appRoutes: Routes =[
     ComparateurComponent,
     PanierComponent,
     DetailsLogementComponent,
+	ReservationComponent
 
   ],
 

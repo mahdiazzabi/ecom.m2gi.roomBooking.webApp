@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 
 import * as moment from 'moment';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Logement } from '../../model/model.logement';
 import { CalendrierService } from '../../services/calendrier.service';
 import { Calendrier } from '../../model/model.Calendrier';
@@ -22,12 +22,13 @@ export class ManageAvailabilityComponent implements OnInit {
   public date = moment();
   public dateForm: FormGroup;
   calenderToadd :Calendrier;
-  public currentLogement : Logement ;
+  currentLogement : Logement ;
   public listCalenderLogement : Calendrier[] ;
   public daysArr;
-  constructor(private fb: FormBuilder  , private calendrierService : CalendrierService,private router: Router) {
+  constructor(private fb: FormBuilder  , private calendrierService : CalendrierService,private router: Router , private route: ActivatedRoute) {
+    this.currentLogement = JSON.parse(localStorage.getItem('currentLogement'));
+    console.log(this.currentLogement);
     this.initDateRange();
-   
   }
 
   public initDateRange() {
@@ -39,9 +40,6 @@ export class ManageAvailabilityComponent implements OnInit {
 
   public ngOnInit() {
     this.listCalenderLogement = new Array();
-    //for test
-    this.currentLogement = {id_logement:1,titre:"test",nbt_voyageurs:1,nbr_chamber:1,nbr_salle_bain:1,ville:"grenoble",code_postal:"52555",adresse:"test",prix:26,description:"test", client:JSON.parse(sessionStorage.getItem("currentUser"))};   
-    //--------
     this.calendrierService.get_CalendrierLogement(this.currentLogement.id_logement).subscribe(response => {
       if (response.err) {
         this.savingErr = response.err;
@@ -92,7 +90,6 @@ export class ManageAvailabilityComponent implements OnInit {
     }
     let dateFromMoment = this.dateForm.value.dateFrom;
     let dateToMoment = this.dateForm.value.dateTo;
-    this.currentLogement = {id_logement:1,titre:"test",nbt_voyageurs:1,nbr_chamber:1,nbr_salle_bain:1,ville:"grenoble",code_postal:"52555",adresse:"test",prix:26,description:"test", client: JSON.parse(sessionStorage.getItem("currentUser"))};  
     this.calenderToadd = {date_debut:new Date(dateFromMoment) , date_fin:new Date(dateToMoment), logement:this.currentLogement};
     this.calendrierService.addInDispo(this.calenderToadd).subscribe(response => {
       if (response.err) {

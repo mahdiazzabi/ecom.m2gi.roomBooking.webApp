@@ -5,20 +5,20 @@
 
     <div class="panel panel-default">
         <div class="panel-body">
-            <div class="media">
+            <div class="media" *ngFor="let c of listLogement">
                 <div class="media-left">
                   <a href="#">
                     <img class="media-object" width = "250px" src="/assets/img/salon.jpg" alt="cheesecake" >
                   </a>
                 </div>
                 <div class="media-body">
-                  <h4 class="media-heading"> Media heading </h4>
-                 
-                  <button routerLink="/disponibilite" class="btn btn-primary col-md-3 pull-right">Définir disponibilité</button> 
+                  <h3 class="media-heading"> {{c.titre}} </h3>
+                  <h4>{{c.ville}} </h4>
+                  <p>{{c.description}} </p>
+                  <button (click)="manageDisponibilite(c)" class="btn btn-primary col-md-3 pull-right">Gérez les disponibilités</button> 
                 </div>
               </div>
         </div>
       </div>
-  <button routerLink="/LogementsHote" class="btn btn-primary">Mes logements</button>
-  <button routerLink="/ProposerLogement" class="btn btn-primary">Proposer logement</button>  
+  <button routerLink="/ProposerLogement" class="btn btn-primary">Proposez un nouveau logement</button>  
 </div>

@@ -30,7 +30,7 @@ export class LogementsServices{
 
   }
   getLogementsByClientHote(id:number){
-    return this.http.get(`http://localhost:8080/RoomBookingWeb/pagelogementRecherche/${id}`).map((resp)=>resp.json());
+    return this.http.get(`http://localhost:8080/RoomBookingWeb/logementHote/${id}`).map((resp)=>resp.json());
 
   }
 
