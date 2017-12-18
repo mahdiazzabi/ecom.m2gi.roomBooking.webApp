@@ -33,7 +33,7 @@ export class ProposerLogementsHoteComponent implements OnInit {
 
 myForm: FormGroup;
 private currentUser : Client ;
-newLogement: Logement ;
+newLogement: Logement ;x
 savingErr: any = null;
 
 liste_equipements:Equipement[];

@@ -50,6 +50,7 @@ export class LogementsComponent implements OnInit {
                 this.nbrpages = new Array(data.total);
                 //to notify parent recherche-result
                 if (this.listLogement.length > 0) {
+                     localStorage.setItem('CurentRecherche', JSON.stringify(this.recherche));
                   this.resultResearch= data.totalLogement +" logements ont était trouvé à " + this.recherche.villeRecherche
                 }else{
                   this.resultResearch= "Aucun résultat trouvé"
@@ -59,8 +60,6 @@ export class LogementsComponent implements OnInit {
                 //to notify parent recherche-result
               })
           }
-
-
 
   gotoPage(i:number){
     this.currentpage=i;
