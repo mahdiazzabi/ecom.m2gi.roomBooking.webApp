@@ -22,16 +22,18 @@ declare var $:any;
 export class ProposerLogementsHoteComponent implements OnInit {
 
   options = [
-    { id_equip:'1', nom_equipement:'Produits de Base', checked:false},
-    { id_equip:'2', nom_equipement:'Wifi', checked:false},
-    { id_equip:'3', nom_equipement:'Télévision', checked:false},
-    { id_equip:'4', nom_equipement:'Chauffage', checked:false},
-    { id_equip:'5', nom_equipement:'Climatisation', checked:false}
+    { id_equip:1, nom_equipement:'Produits de Base', checked:false},
+    { id_equip:2, nom_equipement:'Wifi', checked:false},
+    { id_equip:3, nom_equipement:'Télévision', checked:false},
+    { id_equip:4, nom_equipement:'Chauffage', checked:false},
+    { id_equip:5, nom_equipement:'Climatisation', checked:false}
   ]
+
+
 
 myForm: FormGroup;
 private currentUser : Client ;
-newLogement: Logement ;x
+newLogement: Logement ;
 savingErr: any = null;
 
 liste_equipements:Equipement[];
@@ -59,16 +61,28 @@ liste_equip_after:Equipement[]=[{id_equip:1},
 
   Cheked(){
    this.selectedOptions();
-   this.options = this.options.filter( x => x.checked == true);
-  /*  for (let item of this.options) {
-      this.liste_equip_after.push(new Equipement(parseInt(item.id_equip)));
-    }*/
+
+   let options_slected:any[] = this.options.filter( x => x.checked == true);
+
+   for (let op of options_slected) {
+
+     delete op.checked;
+      if(this.liste_equipements)
+        {
+          this.liste_equipements.push(op);
+        }else
+          {
+            this.liste_equipements = [op];
+          }
+     console.log("for",op);
+    }
+
     console.log("test", this.options);
-    console.log("test", this.liste_equip_after);
+    console.log("test0001", this.liste_equipements);
   }
 
 
-  getEquipement(){
+  getEquipement(){   // Returner les equipements depuis la base de données
     this.equipement_service.getAllEquipement()
          .subscribe(data=>{this.liste_equipements=data;
              },err=>{console.log(err);})
@@ -78,7 +92,7 @@ liste_equip_after:Equipement[]=[{id_equip:1},
     this.newLogement = {titre:dataForm.titre,nbt_voyageurs:dataForm.nbt_voyageurs,
                         nbr_chamber:dataForm.nbr_chamber,nbr_salle_bain:dataForm.nbr_salle_bain,
                         ville:dataForm.ville,code_postal:dataForm.code_postal,adresse:dataForm.adresse,
-                        prix:dataForm.prix,description:dataForm.description,equipements:this.liste_equip_after,
+                        prix:dataForm.prix,description:dataForm.description,equipements:this.liste_equipements,
                         client: JSON.parse(sessionStorage.getItem("currentUser"))};
 
     this.logementService.addLogements(this.newLogement).subscribe(response => {
@@ -104,7 +118,7 @@ liste_equip_after:Equipement[]=[{id_equip:1},
 
 ngOnInit() {
 
-  this.getEquipement();
+  //this.getEquipement();
   console.log("liste de equips",this.liste_equipements);
 
   this.myForm = this.formBuilder.group({
