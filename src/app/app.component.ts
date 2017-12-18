@@ -4,22 +4,32 @@ import { Observable } from 'rxjs/Observable';
 import { Client } from '../model/model.client';
 import { Router} from '@angular/router';
 import {Logement} from "../model/model.logement";
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit , OnDestroy{
+export class AppComponent implements OnInit {
 
-  private isLoggedIn = false;
+  private isLoggedIn ;
   private loginSub;
   private userSub;
   private currentClient : Client ;
 
   title = 'app';
   constructor(private clientService : ClientService, private router: Router){
+    console.log("constructeur");
+    
     this.currentClient = new Client();
-
+    this.currentClient = JSON.parse( sessionStorage.getItem("currentUser")) ;
+    if (this.currentClient != null) {
+      console.log(this.currentClient);
+      this.isLoggedIn = true ;
+    } else {
+      console.log(this.currentClient); 
+      this.isLoggedIn = false ;
+    } 
   }
 
   ngOnChanges(changes: SimpleChanges ) {
@@ -27,19 +37,27 @@ export class AppComponent implements OnInit , OnDestroy{
    }
 
   ngOnInit() {
+    console.log("Init");
+    
     this.loginSub = this.clientService.isLoggedIn.subscribe(val => {
-      this.isLoggedIn = val;
+       this.isLoggedIn = val;
     });
 
     this.userSub = this.clientService.currentClientLogged.subscribe(val => {
       this.currentClient = val;
     });
 
+    this.currentClient = JSON.parse( sessionStorage.getItem("currentUser")) ;
+    if (this.currentClient != null) {
+      console.log(this.currentClient);
+      this.isLoggedIn = true ;
+    } else {
+      console.log(this.currentClient); 
+      this.isLoggedIn = false ;
+    }  
   }
 
-  ngOnDestroy() {
-    this.loginSub.unsubscribe();
-  }
+
 
   logOut(){
     sessionStorage.clear();
@@ -60,12 +78,12 @@ export class AppComponent implements OnInit , OnDestroy{
 
   get_total_element_Comparateur():number{
     let liste_logs:Logement[]= JSON.parse(localStorage.getItem("Comparateur_array_logs"));
- /*   if (liste_logs)
-    {*/
+   if (liste_logs)
+    {
       return liste_logs.length;
-    /*}else{
+    }else{
       return 0;
-    }*/
+    }
   }
 
 }
