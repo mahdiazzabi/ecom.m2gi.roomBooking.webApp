@@ -4,8 +4,9 @@ import { Logement } from "./model.logement";
 
 export class Reservation {
     id_reservation?:number;
-    date: Date;
-    duree: number;
+    dateDebut: Date;
+    dateFin: Date;
+    prix: number;
     client?:Client;
     logement?: Logement;
     }

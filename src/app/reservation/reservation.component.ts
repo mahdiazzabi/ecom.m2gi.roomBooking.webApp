@@ -20,28 +20,39 @@ export class ReservationComponent implements OnInit {
   private duree:number;
   newReservation: Reservation ;
   savingErr: any = null;
-   test = { logement:"1", date:"18/12/2017", duree:"2" }​​​​​​​;
   constructor(private activatedRoute: ActivatedRoute, private router: Router,private reservationService:ReservationServices) { }
   
   ngOnInit() {
   }
+  get_logement():Logement[]
+  {
+      let tab_logs:Logement[]= JSON.parse(localStorage.getItem("panier_array_logs"));
+      if (tab_logs){ 
+        return tab_logs;
+      }else {
+        return null;
+      }
+  }
   onSaveReservation(){
     this.currentUser = JSON.parse(sessionStorage.getItem("currrentUser"));
-     this.test=JSON.parse(localStorage.getItem("test"));
      
     console.log(JSON.stringify(this.currentUser));
-    this.newReservation = {date:this.date , logement:this.logement,client:this.currentUser, duree:this.duree};  
-    console.log(JSON.stringify(this.newReservation));
+    for(let l of this.get_logement()){
+      //this.newReservation = {dateDebut:this.date,  logement:l,client:this.currentUser};  
+        console.log(JSON.stringify(this.newReservation));
 
-    this.reservationService.addReservations(this.newReservation).subscribe(response => {
-      if (response.err) {
-        this.savingErr = response.err;
-      } else {
+        this.reservationService.addReservations(this.newReservation).subscribe(response => {
+          if (response.err) {
+            this.savingErr = response.err;
+          } else {
 
-        this.router.navigate(['/reservation']);
+            this.router.navigate(['/reservation']);
 
-      }
-    });
+          }
+        });
+
+    }
+  
 
 }
 
