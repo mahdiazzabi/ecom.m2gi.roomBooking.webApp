@@ -29,8 +29,6 @@ export class ProposerLogementsHoteComponent implements OnInit {
     { id_equip:'5', nom_equipement:'Climatisation', checked:false}
   ]
 
-
-
 myForm: FormGroup;
 private currentUser : Client ;
 newLogement: Logement ;x

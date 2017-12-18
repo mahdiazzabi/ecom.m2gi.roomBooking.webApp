@@ -12,17 +12,16 @@ export class LoginComponent implements OnInit {
 
   currentClient: Client ;
   savingErr: any = null;
- 
+
    constructor(private activatedRoute: ActivatedRoute,
      private router: Router,private clientService:ClientService) {
- 
+
     }
   ngOnInit() {
   }
 
+  onLogin(dataForm){
 
-  onLogin(dataForm){  
-   
     this.clientService.logIn(dataForm.mail ,btoa( dataForm.mdp)).subscribe(response => {
       if (response.err) {
         this.savingErr = response.err;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Logement} from "../../model/model.logement";
+import {Reservation} from "../../model/model.reservation";
 
 @Component({
   selector: 'app-panier',
@@ -15,24 +16,33 @@ export class PanierComponent implements OnInit {
   }
 
 
-  get_logement():Logement[]
+  get_logement():Reservation[]
   {
-      let tab_logs:Logement[]= JSON.parse(localStorage.getItem("panier_array_logs"));
+      let tab_res:Reservation[]= JSON.parse(localStorage.getItem("panier_array_logs"));
 
       //console.log(tab_logs);
-      return tab_logs;
+      return tab_res;
   }
 
   get_total_element():number{
-    let liste_logs:Logement[]= JSON.parse(localStorage.getItem("panier_array_logs"));
+    let liste_logs:Reservation[]= JSON.parse(localStorage.getItem("panier_array_logs"));
     return liste_logs.length;
   }
+
+  get_dure(debut:any,fin:any):number{
+
+    let duree: number = Date.parse(fin) - Date.parse(debut);
+
+  return (duree)/(3600*24*1000);
+  }
+
   get_total():number{
-      let liste_logs:Logement[]=this.get_logement();
+
+      let liste_res:Reservation[]=this.get_logement();
       let somme:number=0;
-      if (liste_logs){
-        for (var i = 0; i < liste_logs.length; i++) {
-          somme += liste_logs[i].prix;
+      if (liste_res){
+        for (var i = 0; i < liste_res.length; i++) {
+          somme += liste_res[i].prix_duree;
         }
         return somme;
       }else {
@@ -41,9 +51,9 @@ export class PanierComponent implements OnInit {
   }
 
   delete_logement(i:number){
-     let liste_logs:Logement[]=this.get_logement();
-     liste_logs.splice(i,1);
-    localStorage.setItem("panier_array_logs",JSON.stringify(liste_logs));
+     let liste_res:Reservation[]=this.get_logement();
+    liste_res.splice(i,1);
+    localStorage.setItem("panier_array_logs",JSON.stringify(liste_res));
   }
 
 

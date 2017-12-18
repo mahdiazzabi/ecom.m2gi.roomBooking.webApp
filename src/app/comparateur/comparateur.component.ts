@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Logement} from "../../model/model.logement";
 import {Equipement} from "../../model/model.equipement";
+import {Reservation} from "../../model/model.reservation";
 
 @Component({
   selector: 'app-comparateur',
@@ -84,21 +85,37 @@ export class ComparateurComponent implements OnInit {
 
 
   AddToCart(log:Logement){
-    let tab_logs:Logement[]= JSON.parse(localStorage.getItem("panier_array_logs"));
-    if (tab_logs){
 
-      if (tab_logs.find(x => x.id_logement == log.id_logement)){
+    let rechrche:any = JSON.parse(localStorage.getItem("CurentRecherche"));
+
+    let duree: number = Date.parse(rechrche.dateFin) - Date.parse(rechrche.dateDebut);
+
+    duree = (duree)/(3600*24*1000);
+
+    console.log("duree",duree);
+    let res:Reservation =  new Reservation()
+    res.logement = log;
+    res.date_Debut = rechrche.dateDebut;
+    res.date_Fin = rechrche.dateFin;
+    res.prix_duree = duree*log.prix;
+    res.client = JSON.parse( sessionStorage.getItem("currentUser")) ;
+
+    let tab_reservations:Reservation[] = JSON.parse(localStorage.getItem("panier_array_logs"));
+
+    if (tab_reservations){
+
+      if (tab_reservations.find(x => x.logement.id_logement == log.id_logement)){
         alert("Vous avez déja ajouter ce logement à votre panier!");
       }
       else
       {
-        tab_logs.push(log);
-        localStorage.setItem("panier_array_logs",JSON.stringify(tab_logs));
-      }
+        tab_reservations.push(res);
 
+        localStorage.setItem("panier_array_logs",JSON.stringify(tab_reservations));
+      }
     }else {
-      let tab_logs:Logement[] = [log] ;
-      localStorage.setItem("panier_array_logs",JSON.stringify(tab_logs));
+      let tab_reservations:Reservation[] = [res] ;
+      localStorage.setItem("panier_array_logs",JSON.stringify(tab_reservations));
     }
   }
 
