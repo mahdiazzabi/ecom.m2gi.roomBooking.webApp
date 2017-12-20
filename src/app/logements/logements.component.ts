@@ -19,13 +19,14 @@ export class LogementsComponent implements OnInit {
   nbrpages:Array<number>;
   currentLogement:Logement;
 
-  @Input('MainPage') MainPage:boolean;
+  @Input('mainPage') mainPage:boolean;
 
   @Input('mode') mode:number;
 
   resultResearch: String ;
 
   @Input('recherche') recherche: Recherche;
+  
 
 
   constructor(public http:Http, public logementsService:LogementsServices) {
@@ -41,7 +42,12 @@ export class LogementsComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.mainPage) {
+      
+      this.doGetAllLogements();
+    } else {
       this.doGetLogementsByVilleDateFromDateTo();
+    }
      // this.DoGetAllLogements();
 
   }
@@ -66,17 +72,18 @@ export class LogementsComponent implements OnInit {
               })
           }
 
-/*  DoGetAllLogements(){
-    this.logementsService.getLogements()
+ doGetAllLogements(){
+    this.logementsService.getLogements(this.currentpage,this.size)
       .subscribe(data=>{
-        this.ListAllLogements=data;
-        console.log("bnjour", this.ListAllLogements);
+        this.listLogement=data.logemens;
         //to notify parent recherche-result
+        
+        this.resultResearch= "Tous nos logements"
       },err=>{
         console.log(err);
         //to notify parent recherche-result
       })
-  }*/
+  }
 
 
   gotoPage(i:number){
