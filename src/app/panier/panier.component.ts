@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Logement} from "../../model/model.logement";
 import {Reservation} from "../../model/model.reservation";
+import {Alert, AlertCenterService, AlertType} from "ng2-alert-center";
+import {Router} from "@angular/router";
+import {Client} from "../../model/model.client";
 
 @Component({
   selector: 'app-panier',
@@ -9,12 +12,37 @@ import {Reservation} from "../../model/model.reservation";
 })
 export class PanierComponent implements OnInit {
 
-  constructor() { }
+  constructor(private servicealert:AlertCenterService,private router: Router) { }
 
   ngOnInit() {
     this.get_logement();
   }
 
+  timeout() {
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 3150);
+  }
+
+  sendAnAlertBuy(msg:string ) {
+    const alert = Alert.create(AlertType.WARNING, msg, 3000 ,true);
+    this.servicealert.alert(alert);
+  }
+
+  toBuy(){
+
+     if(sessionStorage.getItem("currentUser") != null)
+   {
+     this.router.navigate(['/reservation']);
+
+   }else{
+       this.sendAnAlertBuy('<span class="glyphicon glyphicon-record"></span> <strong>Attention !!</strong>' +
+      '<hr class="message-inner-separator">' +
+      '<b>Vous devez <b>vous Connecter</b> avant que passiez votre commande</p>');
+
+       this.timeout();
+  }
+  }
 
   get_logement():Reservation[]
   {

@@ -13,10 +13,13 @@ import { Recherche } from '../../utils/utils.recherche';
 })
 export class LogementsComponent implements OnInit {
   listLogement: Array<any> = null;
+  ListAllLogements: Array<any> = null;
   currentpage:number=0;
   size:number=8;
   nbrpages:Array<number>;
   currentLogement:Logement;
+
+  @Input('MainPage') MainPage:boolean;
 
   @Input('mode') mode:number;
 
@@ -39,8 +42,10 @@ export class LogementsComponent implements OnInit {
 
   ngOnInit() {
       this.doGetLogementsByVilleDateFromDateTo();
+     // this.DoGetAllLogements();
 
   }
+
 
   doGetLogementsByVilleDateFromDateTo(){
 
@@ -60,6 +65,19 @@ export class LogementsComponent implements OnInit {
                 //to notify parent recherche-result
               })
           }
+
+/*  DoGetAllLogements(){
+    this.logementsService.getLogements()
+      .subscribe(data=>{
+        this.ListAllLogements=data;
+        console.log("bnjour", this.ListAllLogements);
+        //to notify parent recherche-result
+      },err=>{
+        console.log(err);
+        //to notify parent recherche-result
+      })
+  }*/
+
 
   gotoPage(i:number){
     this.currentpage=i;

@@ -91,6 +91,24 @@
 .btn-compa{
 
   margin-bottom: 5px;
-  margin-left: 35%;
+ width: 100%;
 
+}
+
+.div-price{
+  color: #337ab7;
+  text-align: center;
+  margin-left: -5%;
+  margin-bottom: 2%;
+  margin-top:-4%;
+}
+.div-price strong
+{
+  font-size: large;
+  font-family: "Roboto", "Trebuchet MS", Arial, Helvetica, sans-serif;
+  color: #286090;
+}
+
+.div-price .fa-money{
+  color: black;
 }

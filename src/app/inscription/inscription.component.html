@@ -2,8 +2,12 @@
   <div class="panel panel-primary">
     <div class="panel-heading">Inscription</div>
     <div class="panel-body">
-    
-    <form #inscriptionForm="ngForm" (ngSubmit)="onSaveClient(inscriptionForm.value)">    
+
+      <div>
+        <nac-alert-center [animation]="'fancy'" [htmlTextEnabled]="true"></nac-alert-center>
+      </div>
+
+    <form #inscriptionForm="ngForm" (ngSubmit)="onSaveClient(inscriptionForm.value)">
       <div class="form-group">
           <label class="control-label">Nom:</label>
           <input class="form-control"  type="text" ngModel name="nom" required  />
@@ -18,22 +22,23 @@
       </div>
       <div class="form-group">
         <label class="control-label">Tel:</label>
-        <input class="form-control" type="text" ngModel name="telephone" required/>
-    </div>   
+        <input class="form-control" type="text" size='10' ngModel name="telephone" required/>
+    </div>
     <div class="form-group">
         <label class="control-label">Mot de passe:</label>
         <input class="form-control" type="password" ngModel name="mdp" required/>
-    </div>   
+    </div>
     <div class="form-group">
         <!-- TODO CONTROLE DE SAISIE MDP = MDP2 -->
         <label class="control-label">Confirmer votre mot de passe:</label>
         <input class="form-control" type="password" ngModel name="mdp2" required/>
-    </div>   
-        <button [disabled]="!inscriptionForm.valid" type="submit" class="btn btn-primary" > S'inscrire </button>  
-        <button routerLink="/recherche" class="btn btn-primary " style="float: right;">Retour</button>
-        
+    </div>
+
+        <button routerLink="/recherche" class="btn btn-primary ">Retour</button>
+       <button [disabled]="!inscriptionForm.valid" type="submit" class="btn btn-primary " style="float: right;" > S'inscrire </button>
+
     </form>
-      
+
     </div>
   </div>
   </div>

@@ -2,16 +2,29 @@
   margin-left: 2%;
   margin-top: 0.8%;
 }
+
 .disabled {
   pointer-events: none;
   cursor: not-allowed;
 }
 
+.nbr-panier
+{
+  color: aqua;
+}
 
+.wrapper {
+  min-height: 80%;
+  margin-bottom: 20px;
+}
 
-
+/*footer
+{
+ !* bottom: 0;*!
+}*/
 
 /*FOOTER START///////////////////*/
+
 .footer {
   padding: 50px 0 20px 0;
   background-color: #eee;
@@ -43,6 +56,14 @@
   color: #337ab7;
   font-size:25px;
   padding:5px;
+}
+
+.footer .social-icon i:hover {
+  transform: scale(1.15) rotate(360deg);
+  -webkit-transform: scale(1.1) rotate(360deg);
+  -moz-transform: scale(1.1) rotate(360deg);
+  -ms-transform: scale(1.1) rotate(360deg);
+  -o-transform: scale(1.1) rotate(360deg);
 }
 .footer .acount-icon a{
   display:block;
@@ -91,5 +112,3 @@
   margin: 1em 0;
   padding: 0;
 }
-
-

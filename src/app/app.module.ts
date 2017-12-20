@@ -24,6 +24,9 @@ import { DetailsLogementComponent } from './details-logement/details-logement.co
 import {AuthManager} from '../services/authManager';
 import {AuthHoteManager} from '../services/authHoteManager';
 import {EquipementService} from "../services/equipement.service";
+import {AlertCenterModule} from "ng2-alert-center";
+import {DialogModule} from 'primeng/primeng';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 const appRoutes: Routes =[
@@ -57,13 +60,14 @@ const appRoutes: Routes =[
     ComparateurComponent,
     PanierComponent,
     DetailsLogementComponent,
-	ReservationComponent
+    ReservationComponent
 
   ],
 
   imports: [
     AccordionModule.forRoot(), BsDatepickerModule.forRoot(), ImageUploadModule.forRoot(), InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
-    BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule,HttpModule
+    BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule,HttpModule,AlertCenterModule,DialogModule
+    ,BrowserAnimationsModule
   ],
   providers: [ClientService, LogementsServices, CalendrierService ,AuthManager , AuthHoteManager,EquipementService],
   bootstrap: [AppComponent]

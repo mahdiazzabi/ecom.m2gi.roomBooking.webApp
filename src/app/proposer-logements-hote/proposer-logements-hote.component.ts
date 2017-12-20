@@ -9,6 +9,7 @@ import { Client } from '../../model/model.client';
 import { ClientService } from '../../services/client.service';
 import {Equipement} from "../../model/model.equipement";
 import {EquipementService} from "../../services/equipement.service";
+import {Alert, AlertCenterService, AlertType} from "ng2-alert-center";
 export function getAccordionConfig(): AccordionConfig {
     return Object.assign(new AccordionConfig(), { closeOthers: true });
 }
@@ -47,11 +48,20 @@ liste_equip_after:Equipement[]=[{id_equip:1},
  constructor(private activatedRoute: ActivatedRoute,
              private router: Router,private logementService:LogementsServices,
              private clientService:ClientService,private formBuilder: FormBuilder,
-             public equipement_service:EquipementService) {
+             public equipement_service:EquipementService,
+             private servicealert:AlertCenterService) {
 
   }
 
-
+  sendAnAlertProposrer(msg:string ) {
+    const alert = Alert.create(AlertType.SUCCESS, msg, 2500 ,true);
+    this.servicealert.alert(alert);
+  }
+    timeout() {
+      setTimeout(() => {
+        this.router.navigate(['/EspaceHote', {currentClient : this.currentUser  }]);
+      }, 3000);
+    }
 
    selectedOptions() {
     return this.options
@@ -89,6 +99,9 @@ liste_equip_after:Equipement[]=[{id_equip:1},
       }
 
   onSaveLogement(dataForm){
+
+    this.Cheked();
+
     this.newLogement = {titre:dataForm.titre,nbt_voyageurs:dataForm.nbt_voyageurs,
                         nbr_chamber:dataForm.nbr_chamber,nbr_salle_bain:dataForm.nbr_salle_bain,
                         ville:dataForm.ville,code_postal:dataForm.code_postal,adresse:dataForm.adresse,
@@ -105,12 +118,16 @@ liste_equip_after:Equipement[]=[{id_equip:1},
             if (response.err) {
              this.savingErr = response.err;
             }else{
-
             sessionStorage.setItem("currentUser", JSON.stringify(response.client));
             }
-
         });
-        this.router.navigate(['/EspaceHote', {currentClient : this.currentUser  }]);
+
+        this.sendAnAlertProposrer('<span class="glyphicon glyphicon-ok"></span> ' +
+          '<strong>Bien enregistré</strong> <hr class="message-inner-separator"> ' +
+          '<p>Merci bien de penser aux <b>Disponibilités</b> de votre logement</p>');
+
+          this.timeout();
+
       }
     });
 

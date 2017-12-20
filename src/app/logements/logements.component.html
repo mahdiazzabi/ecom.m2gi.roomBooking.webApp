@@ -1,20 +1,20 @@
 <div *ngIf="mode==0">
-  <h2> {{resultResearch}}</h2>
+  <h2 style="margin-left: 2%;"> {{resultResearch}} </h2>
 <div class="module-card-wrap" >
   <div class="module-card" *ngFor="let c of listLogement">
     <div class="module-card-bottom">
       <img src="/assets/img/salon.jpg" alt="cheesecake" class="module-card-img"/>
-      <div class="module-card-title">Cheesecakeffff</div>
+      <div class="module-card-title">{{c.titre}}</div>
       <div class="module-card-meta">
         <div class="module-card-category">
           <span class="fa fa-tag"></span>
-          <span>test</span>
+          <span>{{c.ville}}</span>
         </div>
         <div class="module-card-author">
           <span class="fa fa-user" ></span>
-          <a href="">
-          <!--<span>{{c.client.nom}}</span>
-          <span>{{c.client.prenom}}</span>-->
+          <a href="" class="disabled">
+          <span>{{c.client.nom}}</span>
+          <span>{{c.client.prenom}}</span>
           </a>
         </div>
       </div> <!-- /module-card-meta -->
@@ -22,10 +22,15 @@
       <div>
         <p >{{c.description | slice:0:68}}...</p>
       </div>
+
+       <div class="div-price">
+              <span><i class="fa fa-money" aria-hidden="true"></i> <strong>{{c.prix}}</strong> <i class="fa fa-eur"></i>/Nuit</span>
+       </div>
+
         <div class="btn-compa">
-            <button type="button" class="btn btn-info btn-xs" (click)="AddToComparateur(c)">Ajouter au Comparateur</button>
+            <button type="button" class="btn btn-info btn-xs "(click)="AddToComparateur(c)" style="width: 100%;">Ajouter au Comparateur</button>
         </div>
-      <button class="module-card-button clickable" (click)="getLogement(c,1)">See More</button>
+      <button class="module-card-button clickable" (click)="getLogement(c,1)">Voir Détails</button>
     </div>
 
   </div>

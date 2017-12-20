@@ -10,15 +10,12 @@ export class LogementsServices{
 
   }
 
-  getLogements(page:number, size:number){
-    return this.http.get("http://localhost:8080/RoomBookingWeb/pagelogement/"+page+"/"+size)
+  getLogements(){
+    return this.http.get("http://localhost:8080/RoomBookingWeb/logements/")
       .map((resp)=>resp.json());
 
   }
 
-  getAllLogements(){
-    return this.http.get("http://localhost:8080/RoomBookingWeb/logements").map((resp)=>resp.json());
-  }
 
   getLogement(id:number){
      return this.http.get("http://localhost:8080/RoomBookingWeb/logement/"+id)

@@ -3,32 +3,42 @@ import { Recherche } from '../../utils/utils.recherche';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import * as moment from 'moment';
+import {Router} from "@angular/router";
+
 @Component({
   selector: 'app-recherche-logement',
   templateUrl: './recherche-logement.component.html',
   styleUrls: ['./recherche-logement.component.css']
-  
+
 })
 export class RechercheLogementComponent implements OnInit {
   recherche: Recherche ;
   public RechercheForm: FormGroup;
   doResearchNow: Boolean ;
-  constructor(private fb: FormBuilder ) {
+
+
+  constructor(private fb: FormBuilder, private router: Router) {
     this.recherche = new Recherche();
     this.initRechercheForm();
     this.doResearchNow = false ;
    }
- 
+
    public initRechercheForm() {
      return (this.RechercheForm = this.fb.group({
        dateFrom: [null, Validators.required],
        dateTo: [null, Validators.required],
        ville: [null, Validators.required],
        nbrVoyageur: [null, Validators.required],
-
      }));
    }
-  ngOnInit() {  
+
+  ngOnInit() {
+
+   /* if(sessionStorage.getItem("currrentUser")===null)
+      {
+        this.router.navigate(['/recherche']);
+      }*/
+
   }
   rechercheLogement(){
 

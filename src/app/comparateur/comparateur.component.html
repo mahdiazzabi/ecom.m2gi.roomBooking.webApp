@@ -29,7 +29,7 @@
 
        <tr>
          <td>Proposé par : </td>
-         <td *ngFor="let l of get_logement(); let i = index">{{l.client}}</td>
+         <td class="text-center" *ngFor="let l of get_logement(); let i = index"><strong>{{l.client.nom}} {{l.client.prenom}}</strong></td>
        </tr>
 
        <tr>
