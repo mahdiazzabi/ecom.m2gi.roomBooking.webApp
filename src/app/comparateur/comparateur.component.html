@@ -5,11 +5,11 @@
       <thead>
         <tr>
             <th class="col-sm-2">Logement</th>
-          <th *ngFor="let l of get_logement(); let i = index" class="col-sm-2 ">
+          <th *ngFor="let l of get_logement(); let i = index" class="col-sm-2 text-center ">
               <div>
                 <button type="button" class="close" (click)="delete_logement(i)">&times;</button>
               </div>
-            N°{{i+1}} : <a class="clickable">{{l.titre| slice:0:27}}...</a>
+            N°{{i+1}} : <a class="clickable " >{{l.titre| slice:0:27}}...</a>
           </th>
         </tr>
       </thead>
@@ -18,7 +18,14 @@
             <td>Images</td>
             <td class="text-center" *ngFor="let l of get_logement(); let i = index">
 
-              <img src="/assets/img/salon.jpg" alt="cheesecake" class="module-card-img" width="200" height="150"/><br> <br>
+              <div *ngIf="l.images[0]">
+              <img src="/assets/img/{{l.images[0].path}}" alt="{{l.images[0].path}}" class="module-card-img" width="200" height="150"/><br> <br>
+              </div>
+
+              <div *ngIf="!l.images[0]">
+                <img src="/assets/img/salon.jpg" alt="cheesecake" class="module-card-img" width="200" height="150"/><br> <br>
+              </div>
+
 
               <button type="button" class="btn btn-danger btn-sm " (click)="AddToCart(l)" >
                 <span class="glyphicon glyphicon-shopping-cart"></span> Ajouter au Panier
@@ -65,7 +72,7 @@
 
        <tr>
          <td>Prix :  </td>
-         <td class="text-center" *ngFor="let l of get_logement(); let i = index">{{l.prix}} <i class="fa fa-eur" aria-hidden="true"></i> </td>
+         <td class="text-center" *ngFor="let l of get_logement(); let i = index">  <img src="assets/img/price.png"> <strong style="color: #000; font-family:'Roboto';"> {{l.prix}}</strong> <i class="fa fa-eur" aria-hidden="true"></i> </td>
        </tr>
       </tbody>
     </table>

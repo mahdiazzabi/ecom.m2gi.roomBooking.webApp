@@ -26,7 +26,7 @@ export class LogementsComponent implements OnInit {
   resultResearch: String ;
 
   @Input('recherche') recherche: Recherche;
-  
+
 
 
   constructor(public http:Http, public logementsService:LogementsServices) {
@@ -43,7 +43,7 @@ export class LogementsComponent implements OnInit {
 
   ngOnInit() {
     if (this.mainPage) {
-      
+
       this.doGetAllLogements();
     } else {
       this.doGetLogementsByVilleDateFromDateTo();
@@ -62,7 +62,7 @@ export class LogementsComponent implements OnInit {
                 //to notify parent recherche-result
                 if (this.listLogement.length > 0) {
                      localStorage.setItem('CurentRecherche', JSON.stringify(this.recherche));
-                  this.resultResearch= data.totalLogement +" logements ont était trouvé à " + this.recherche.villeRecherche
+                  this.resultResearch= data.totalLogement +" Logements ont été à " + this.recherche.villeRecherche
                 }else{
                   this.resultResearch= "Aucun résultat trouvé"
                 }
@@ -77,7 +77,7 @@ export class LogementsComponent implements OnInit {
       .subscribe(data=>{
         this.listLogement=data.logemens;
         //to notify parent recherche-result
-        
+
         this.resultResearch= "Tous nos logements"
       },err=>{
         console.log(err);

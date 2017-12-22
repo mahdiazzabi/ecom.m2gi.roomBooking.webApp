@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {InputTextareaModule, ButtonModule, SpinnerModule, FileUploadModule} from 'primeng/primeng';
+import {InputTextareaModule, ButtonModule, SpinnerModule} from 'primeng/primeng';
 import { AppComponent } from './app.component';
 import { RechercheLogementComponent } from './recherche-logement/recherche-logement.component';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
@@ -27,6 +27,12 @@ import {EquipementService} from "../services/equipement.service";
 import {AlertCenterModule} from "ng2-alert-center";
 import {DialogModule} from 'primeng/primeng';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ImageServices} from "../services/image.service";
+/*
+import { TestimagesComponent } from './testimages/testimages.component';
+import { FileUploadModule,FileSelectDirective } from 'ng2-file-upload';
+import {UPLOAD_DIRECTIVES} from 'ng2-file-uploader/ng2-file-uploader';
+*/
 
 
 const appRoutes: Routes =[
@@ -42,7 +48,7 @@ const appRoutes: Routes =[
   {path :'disponibilite' , component : ManageAvailabilityComponent},
   {path :'reservation' , component : ReservationComponent},
   {path :'disponibilite' , component : ManageAvailabilityComponent},
-  {path:"detailsLogement", component : DetailsLogementComponent},
+  {path:"detailsLogement", component : DetailsLogementComponent}
 
 
 ]
@@ -61,15 +67,13 @@ const appRoutes: Routes =[
     PanierComponent,
     DetailsLogementComponent,
     ReservationComponent
-
   ],
-
   imports: [
-    AccordionModule.forRoot(), BsDatepickerModule.forRoot(), ImageUploadModule.forRoot(), InputTextareaModule, ButtonModule, SpinnerModule,FileUploadModule,
-    BrowserModule,  ImageUploadModule.forRoot(), AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule,HttpModule,AlertCenterModule,DialogModule
+    AccordionModule.forRoot(), BsDatepickerModule.forRoot(), ImageUploadModule.forRoot(), InputTextareaModule, ButtonModule, SpinnerModule,
+    BrowserModule, AccordionModule.forRoot(), ReactiveFormsModule, RouterModule.forRoot(appRoutes), FormsModule,HttpModule,AlertCenterModule,DialogModule
     ,BrowserAnimationsModule
   ],
-  providers: [ClientService, LogementsServices, CalendrierService ,AuthManager , AuthHoteManager,EquipementService],
+  providers: [ClientService, LogementsServices, CalendrierService ,AuthManager , AuthHoteManager,EquipementService, ImageServices],
   bootstrap: [AppComponent]
 })
 

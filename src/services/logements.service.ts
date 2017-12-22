@@ -3,14 +3,17 @@ import {Injectable} from "@angular/core";
 import { Logement } from "../model/model.logement";
 import { Observable } from "rxjs/Observable";
 import { Recherche } from "../utils/utils.recherche";
+<<<<<<< HEAD
 import { environment as env } from './../environments/environment';
+=======
+import {Image} from "../model/model.image";
+>>>>>>> a045a143eb17709a1f1f3a38bf9b1c9ddd298926
 @Injectable()
 export class LogementsServices{
 
   constructor(public http:Http){
 
   }
-
   getLogements(page:number, size:number){
     return this.http.get(`${env.serverUrl}/RoomBookingWeb/pagelogement/${page}/${size}`)
       .map((resp)=>resp.json());
@@ -40,6 +43,8 @@ export class LogementsServices{
         }
       );
   }
+
+
 
 
 }

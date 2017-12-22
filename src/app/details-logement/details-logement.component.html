@@ -2,7 +2,16 @@
   <div class="panel-body">
       <div class="bott">
     <div class="middle">
-          <img src="/assets/img/salon.jpg"  width="80%" height="350" />
+      <br>
+
+      <div *ngIf="logement.images[0]">
+      <img src="/assets/img/{{logement.images[0].path}}"  width="60%" height="300" />
+      </div>
+
+      <div *ngIf="!logement.images[0]">
+        <img src="/assets/img/salon.jpg"  width="60%" height="300" />
+      </div>
+
     </div>
     <div class="spacer marLeft">
       <label class="titre">  {{logement.titre}}</label>
@@ -51,8 +60,9 @@
                 <img src="assets/img/price.png">
                 <label>{{logement.prix}} € <small> par nuit</small></label>
                 <button type="button" class="btn btn-primary marLeft2" (click)="sendMode(0)" >Retour</button>
-                <button type="button" class="btn btn-info " (click)="AddToCart(logement)">Ajouter au Panier</button>
-                <button type="button" class="btn btn-success " (click)="sendMode(0)" >Réserver</button>
+                <button type="button" class="btn btn-danger btn-sm " (click)="AddToCart(logement)" >
+                  <span class="glyphicon glyphicon-shopping-cart"></span> Ajouter au Panier
+                </button>
         </div>
 
     </div>

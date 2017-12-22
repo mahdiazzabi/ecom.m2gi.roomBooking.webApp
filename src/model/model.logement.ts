@@ -1,5 +1,6 @@
 import { Client } from "./model.client";
 import {Equipement} from "./model.equipement";
+import {Image} from "./model.image";
 
 export class Logement {
     id_logement?:number;
@@ -15,4 +16,5 @@ export class Logement {
     description:String ="" ;
     client:Client;
     equipements?:Equipement[];
+    images?:Image[];
     }

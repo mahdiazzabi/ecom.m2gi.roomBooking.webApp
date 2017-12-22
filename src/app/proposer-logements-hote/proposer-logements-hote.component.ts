@@ -10,6 +10,9 @@ import { ClientService } from '../../services/client.service';
 import {Equipement} from "../../model/model.equipement";
 import {EquipementService} from "../../services/equipement.service";
 import {Alert, AlertCenterService, AlertType} from "ng2-alert-center";
+import {FileHolder} from "angular2-image-upload";
+import {ImageServices} from "../../services/image.service";
+import {Image} from "../../model/model.image";
 export function getAccordionConfig(): AccordionConfig {
     return Object.assign(new AccordionConfig(), { closeOthers: true });
 }
@@ -39,6 +42,10 @@ savingErr: any = null;
 
 liste_equipements:Equipement[];
 
+image_path;
+
+image:Image;
+
 liste_equip_after:Equipement[]=[{id_equip:1},
 {id_equip:4}];
 
@@ -49,7 +56,8 @@ liste_equip_after:Equipement[]=[{id_equip:1},
              private router: Router,private logementService:LogementsServices,
              private clientService:ClientService,private formBuilder: FormBuilder,
              public equipement_service:EquipementService,
-             private servicealert:AlertCenterService) {
+             private servicealert:AlertCenterService,
+             private imageservice:ImageServices) {
 
   }
 
@@ -120,6 +128,16 @@ liste_equip_after:Equipement[]=[{id_equip:1},
             }else{
             sessionStorage.setItem("currentUser", JSON.stringify(response.client));
             }
+        });
+
+        this.image = {path:this.image_path,logement:response.logement};
+
+        this.imageservice.InsertImagePah(this.image).subscribe(response => {
+          if (response.err) {
+            this.savingErr = response.err;
+          } else {
+            console.log("insetion reussi!!");
+          }
         });
 
         this.sendAnAlertProposrer('<span class="glyphicon glyphicon-ok"></span> ' +
@@ -194,6 +212,15 @@ ngOnInit() {
     $('div.setup-panel div a.btn-primary').trigger('click');
   });
 }
+
+  onUploadFinished(file: FileHolder) {
+
+    //let path  = file.serverResponse;
+
+    this.image_path = file.file.name;
+
+    console.log("path" , JSON.stringify(file.serverResponse));
+  }
 
 }
 
