@@ -33,6 +33,7 @@
     "modules": "^0.4.0",
     "moment": "^2.19.3",
     "ng2-alert-center": "^0.5.1",
+    "ng2-file-uploader": "^0.1.4",
     "ngx-bootstrap": "^2.0.0-beta.8",
     "primeng": "^4.3.0",
     "rollup-plugin-commonjs": "^8.2.6",

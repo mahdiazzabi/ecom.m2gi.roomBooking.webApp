@@ -1,9 +1,18 @@
 <div *ngIf="mode==0">
-  <h2 style="margin-left: 2%;"> {{resultResearch}} </h2>
+  <h3 style="margin-left: 2%; color: #337ab7;"> <em>{{resultResearch}}</em> </h3>
+  <hr width="80%" style="margin-top: -0.5%;">
 <div class="module-card-wrap" >
   <div class="module-card" *ngFor="let c of listLogement">
     <div class="module-card-bottom">
-      <img src="/assets/img/salon.jpg" alt="cheesecake" class="module-card-img"/>
+
+        <div *ngIf="c.images[0]">
+m      <img src="/assets/img/{{c.images[0].path}}" alt="{{c.images[0].path}}" class="module-card-img"/>
+        </div>
+
+      <div *ngIf="!c.images[0]">
+        <img src="/assets/img/salon.jpg" alt="pardefaut" class="module-card-img"/>
+      </div>
+
       <div class="module-card-title">{{c.titre}}</div>
       <div class="module-card-meta">
         <div class="module-card-category">

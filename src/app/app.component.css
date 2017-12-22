@@ -1,3 +1,4 @@
+
 .search{
   margin-left: 2%;
   margin-top: 0.8%;
@@ -15,7 +16,6 @@
 
 .wrapper {
   min-height: 80%;
-  margin-bottom: 20px;
 }
 
 /*footer
@@ -29,7 +29,7 @@
   padding: 50px 0 20px 0;
   background-color: #eee;
   color: #212429;
-  margin-top: 3%;
+  margin-top: 1%;
 }
 .footer .title{
   text-align: left;

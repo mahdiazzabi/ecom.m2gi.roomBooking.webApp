@@ -48,6 +48,7 @@ export class RechercheLogementComponent implements OnInit {
     }else if (moment(this.RechercheForm.get('dateFrom').value).isSameOrAfter(moment(this.RechercheForm.get('dateTo').value))) {
      //send msg erreur validation range date invalide
       return ;
+
     }
     this.recherche = new Recherche();
     this.recherche.dateDebut = this.RechercheForm.get('dateFrom').value;

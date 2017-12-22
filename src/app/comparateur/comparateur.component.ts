@@ -84,42 +84,44 @@ export class ComparateurComponent implements OnInit {
   }
 
 
-  AddToCart(log:Logement){
+  AddToCart(log:Logement) {
+      let rechrche: any = JSON.parse(localStorage.getItem("CurentRecherche"));
+    /*  console.log("recherche",rechrche);
+    if (localStorage.getItem("CurentRecherche") != null) {*/
 
-    let rechrche:any = JSON.parse(localStorage.getItem("CurentRecherche"));
+      let duree: number = Date.parse(rechrche.dateFin) - Date.parse(rechrche.dateDebut);
 
-    let duree: number = Date.parse(rechrche.dateFin) - Date.parse(rechrche.dateDebut);
+      duree = (duree) / (3600 * 24 * 1000);
 
-    duree = (duree)/(3600*24*1000);
+      console.log("duree", duree);
+      let res: Reservation = new Reservation()
+      res.logement = log;
+      res.date_Debut = rechrche.dateDebut;
+      res.date_Fin = rechrche.dateFin;
+      res.prix_duree = duree * log.prix;
+      res.client = JSON.parse(sessionStorage.getItem("currentUser"));
 
-    console.log("duree",duree);
-    let res:Reservation =  new Reservation()
-    res.logement = log;
-    res.date_Debut = rechrche.dateDebut;
-    res.date_Fin = rechrche.dateFin;
-    res.prix_duree = duree*log.prix;
-    res.client = JSON.parse( sessionStorage.getItem("currentUser")) ;
+      let tab_reservations: Reservation[] = JSON.parse(localStorage.getItem("panier_array_logs"));
 
-    let tab_reservations:Reservation[] = JSON.parse(localStorage.getItem("panier_array_logs"));
+      if (tab_reservations) {
 
-    if (tab_reservations){
+        if (tab_reservations.find(x => x.logement.id_logement == log.id_logement)) {
+          alert("Vous avez déja ajouter ce logement à votre panier!");
+        }
+        else {
+          tab_reservations.push(res);
 
-      if (tab_reservations.find(x => x.logement.id_logement == log.id_logement)){
-        alert("Vous avez déja ajouter ce logement à votre panier!");
+          localStorage.setItem("panier_array_logs", JSON.stringify(tab_reservations));
+        }
+      } else {
+        let tab_reservations: Reservation[] = [res];
+        localStorage.setItem("panier_array_logs", JSON.stringify(tab_reservations));
       }
-      else
+/*    }
+  else
       {
-        tab_reservations.push(res);
-
-        localStorage.setItem("panier_array_logs",JSON.stringify(tab_reservations));
-      }
-    }else {
-      let tab_reservations:Reservation[] = [res] ;
-      localStorage.setItem("panier_array_logs",JSON.stringify(tab_reservations));
-    }
+        alert("Vous n'avez pas spécifer la durée");
+      }*/
   }
-
-
-
-
 }
+

@@ -10,6 +10,7 @@ import {Logement} from "../model/model.logement";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit {
 
   private isLoggedIn ;
@@ -20,16 +21,16 @@ export class AppComponent implements OnInit {
   title = 'app';
   constructor(private clientService : ClientService, private router: Router){
     console.log("constructeur");
-    
+
     this.currentClient = new Client();
     this.currentClient = JSON.parse( sessionStorage.getItem("currentUser")) ;
     if (this.currentClient != null) {
       console.log(this.currentClient);
       this.isLoggedIn = true ;
     } else {
-      console.log(this.currentClient); 
+      console.log(this.currentClient);
       this.isLoggedIn = false ;
-    } 
+    }
   }
 
   ngOnChanges(changes: SimpleChanges ) {
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     console.log("Init");
-    
+
     this.loginSub = this.clientService.isLoggedIn.subscribe(val => {
        this.isLoggedIn = val;
     });
@@ -52,9 +53,9 @@ export class AppComponent implements OnInit {
       console.log(this.currentClient);
       this.isLoggedIn = true ;
     } else {
-      console.log(this.currentClient); 
+      console.log(this.currentClient);
       this.isLoggedIn = false ;
-    }  
+    }
   }
 
 
@@ -63,7 +64,7 @@ export class AppComponent implements OnInit {
     sessionStorage.clear();
     localStorage.clear();
     this.clientService.logOut() ;
-    this.router.navigate(['/recherche']);
+    this.router.navigate(['/login']);
   }
 
   get_total_element_panier():number{

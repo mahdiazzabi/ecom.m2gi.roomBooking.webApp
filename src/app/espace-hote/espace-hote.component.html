@@ -1,24 +1,33 @@
 
 <div class="container spacer">
   <h2>Mes logements :</h2>
- 
+
 
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="media" *ngFor="let c of listLogement">
                 <div class="media-left">
                   <a href="#">
-                    <img class="media-object" width = "250px" src="/assets/img/salon.jpg" alt="cheesecake" >
+
+                    <div *ngIf="c.images[0]">
+                    <img class="media-object" width = "250px" src="/assets/img/{{c.images[0].path}}" alt="cheesecake" >
+                    </div>
+
+                    <div *ngIf="!c.images[0]">
+                      <img class="media-object" width = "250px" src="/assets/img/salon.jpg" alt="cheesecake" >
+                    </div>
+
+
                   </a>
                 </div>
                 <div class="media-body">
                   <h3 class="media-heading"> {{c.titre}} </h3>
                   <h4>{{c.ville}} </h4>
                   <p>{{c.description}} </p>
-                  <button (click)="manageDisponibilite(c)" class="btn btn-primary col-md-3 pull-right">Gérez les disponibilités</button> 
+                  <button (click)="manageDisponibilite(c)" class="btn btn-primary col-md-3 pull-right">Gérez les disponibilités</button>
                 </div>
               </div>
         </div>
       </div>
-  <button routerLink="/ProposerLogement" class="btn btn-primary">Proposez un nouveau logement</button>  
+  <button routerLink="/ProposerLogement" class="btn btn-primary">Proposez un nouveau logement</button>
 </div>

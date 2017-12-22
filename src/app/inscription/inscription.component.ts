@@ -33,7 +33,7 @@ export class InscriptionComponent implements OnInit {
   onSaveClient(dataForm){
 
       //TODO : synchroniser newClient avec ngModel directement et enlever le parametre dataForm
-    if (!isNumber(parseInt(dataForm.telephone)) || (dataForm.telephone.length<10)  )
+    if (!isNumber(parseInt(dataForm.telephone)) || (dataForm.telephone.length<10))
         {
           this.sendAnAlertPhone('<span class="glyphicon glyphicon-hand-right"></span> <strong>Erreur de saisi</strong>\n' +
             '                <hr class="message-inner-separator">\n' +

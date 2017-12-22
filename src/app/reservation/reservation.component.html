@@ -1,13 +1,16 @@
-<div>
-  <nac-alert-center [animation]="'fancy'" [htmlTextEnabled]="true"></nac-alert-center>
+
+<div style="width: 50%; margin-left: 28%;">
+  <nac-alert-center [animation]="'fancy'" [htmlTextEnabled]="true" ></nac-alert-center>
 </div>
+
 
 <div class="container " style="margin-top: 5%;">
   <div class='row'>
       <div class='col-md-4'></div>
       <div class='col-md-4'>
-        <form accept-charset="UTF-8"  class="require-validation" data-cc-on-file="false"
-              data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj" (ngSubmit)="onSaveReservation()">
+
+          <form #payementForm="ngForm" (ngSubmit)="onSaveReservation(payementForm.value)">
+
           <div style="margin:0;padding:0;display:inline">
             <input name="utf8" type="hidden" value="✓" />
             <input name="_method" type="hidden" value="PUT" />
@@ -17,14 +20,14 @@
           <div class='form-row'>
             <div class='col-xs-12 form-group card required'>
               <label class='control-label'>Numéro de la carte</label>
-              <input autocomplete='off' class='form-control card-number' size='20' type='text'>
+              <input autocomplete='off' class='form-control card-number' maxlength="16"  type='text' ngModel name="card_number">
 
             </div>
           </div>
           <div class='form-row'>
             <div class='col-xs-12 form-group card '>
               <label class='control-label'>Code confidentiel</label>
-              <input autocomplete='off' class='form-control card-number' size='20' type='text'>
+              <input autocomplete='off' class='form-control card-number' maxlength="4" type='text'>
             </div>
           </div>
 
@@ -32,11 +35,11 @@
           <div class='form-row'>
 
             <div class='col-xs-4 form-group expiration required'>
-                <input class='form-control card-expiry-month' placeholder='MM' size='2' type='text'>
+                <input class='form-control card-expiry-month' placeholder='MM'  maxlength="2" size='2' type='text'>
             </div>
             <div class='col-xs-4 form-group expiration required'>
 
-              <input class='form-control card-expiry-year' placeholder='AAAA' size='4' type='text'>
+              <input class='form-control card-expiry-year' placeholder='AAAA'  maxlength="4" type='text'>
             </div>
           </div>
           <div class='form-row'>

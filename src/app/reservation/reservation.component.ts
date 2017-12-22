@@ -6,6 +6,8 @@ import { Client } from '../../model/model.client';
 import { Logement } from '../../model/model.logement';
 import {Reservation} from '../../model/model.reservation';
 import {Alert, AlertCenterService, AlertType} from "ng2-alert-center";
+import {isNumber} from "util";
+
 
 
 @Component({
@@ -36,6 +38,11 @@ export class ReservationComponent implements OnInit {
     }, 3500);
   }
 
+  sendAnAlertFormulaire(msg:string ) {
+    const alert = Alert.create(AlertType.DANGER, msg, 3000 ,true);
+    this.servicealert.alert(alert);
+  }
+
 
   get_logement():Reservation[]
   {
@@ -46,9 +53,21 @@ export class ReservationComponent implements OnInit {
         return null;
       }
   }
-  onSaveReservation(){
-    this.currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+  onSaveReservation(dataForm){
 
+    console.log("numero",dataForm.card_number);
+    console.log("numero",dataForm.card_number.length);
+
+    if (!isNumber(parseInt(dataForm.card_number)) || (dataForm.card_number.length!=16)) {
+
+      this.sendAnAlertFormulaire('<span class="glyphicon glyphicon-hand-right"></span> <strong>Erreur de saisi</strong>\n' +
+        '                <hr class="message-inner-separator">\n' +
+        '                <p>\n' +
+        '                   Numero  de Carte est <b>Invalid !! </b>.</p>');
+    }
+    else
+    {
+    this.currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
     console.log(JSON.stringify(this.currentUser));
     for(let R of this.get_logement()){
         this.reservationService.addReservations(R).subscribe(response => {
@@ -64,6 +83,8 @@ export class ReservationComponent implements OnInit {
 
           }
         });
+
+    }
 
     }
 
