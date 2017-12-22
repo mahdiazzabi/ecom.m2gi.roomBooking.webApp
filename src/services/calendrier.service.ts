@@ -15,7 +15,7 @@ export class CalendrierService{
   
      public addInDispo(calender:Calendrier):Observable<CalendrierResponse> {
       
-      return this.http.post(`http://localhost:8080/RoomBookingWeb/dispo`,calender).map(resp=>{
+      return this.http.post(`${env.serverUrl}/RoomBookingWeb/dispo`,calender).map(resp=>{
       const body: any = resp.json();
       return {err: null, calendrier: body , listCalendrier: null};
         }
@@ -23,7 +23,7 @@ export class CalendrierService{
     }
     
     get_CalendrierLogement(id){
-      return this.http.get(`http://localhost:8080/RoomBookingWeb/dispos/logement/${id}`).map(resp=>{
+      return this.http.get(`${env.serverUrl}/RoomBookingWeb/dispos/logement/${id}`).map(resp=>{
         const body2: any = resp.json();
          return {err: null ,listCalendrier: body2};
           }

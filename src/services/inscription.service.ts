@@ -15,7 +15,7 @@ export class InscriptionService{
    
     public save(client: Client): Observable<ClientResponse> {
         
-        return this.http.post(`http://localhost:8080/RoomBookingWeb/client`,client)
+        return this.http.post(`${env.serverUrl}/RoomBookingWeb/client`,client)
         .map(resp=>resp.json());
       }
   

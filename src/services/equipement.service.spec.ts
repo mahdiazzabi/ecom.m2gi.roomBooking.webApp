@@ -1,5 +1,4 @@
 import { TestBed, inject } from '@angular/core/testing';
-
 import { EquipementService } from './equipement.service';
 
 describe('EquipementService', () => {

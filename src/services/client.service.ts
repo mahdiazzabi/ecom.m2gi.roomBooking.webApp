@@ -18,7 +18,7 @@ export class ClientService{
    
      public save(client: Client): Observable<ClientResponse> {
       
-      return this.http.post(`http://localhost:8080/RoomBookingWeb/client`,client).map(resp=>{
+      return this.http.post(`${env.serverUrl}/RoomBookingWeb/client`,client).map(resp=>{
         const body: any = resp.json();
         return {err: null, client: body };
           }
@@ -29,7 +29,7 @@ export class ClientService{
 
     public update(client: Client): Observable<ClientResponse> {
 
-      return this.http.post(`http://localhost:8080/RoomBookingWeb/client/update`,client).map(resp=>{
+      return this.http.post(`${env.serverUrl}/RoomBookingWeb/client/update`,client).map(resp=>{
         const body: any = resp.json();
         sessionStorage.setItem("currentUser", JSON.stringify(body) )
         return {err: null, client: body };
@@ -55,7 +55,7 @@ export class ClientService{
     
        
         public logIn(mail: String, mdp: String): Observable<ClientResponse> {
-            return this.http.get(`http://localhost:8080/RoomBookingWeb/client/login/${mail}/${mdp}`).map(res => {
+            return this.http.get(`${env.serverUrl}/RoomBookingWeb/client/login/${mail}/${mdp}`).map(res => {
             const body: any = res.json();
               if (typeof(Storage) !== 'undefined'){
                 sessionStorage.setItem("currentUser", JSON.stringify(body) )
