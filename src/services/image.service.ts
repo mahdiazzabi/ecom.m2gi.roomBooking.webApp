@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {Image} from "../model/model.image";
 import {Observable} from "rxjs/Observable";
+import { environment as env } from '../environments/environment';
 
 @Injectable()
 export class ImageServices {
@@ -11,8 +12,7 @@ export class ImageServices {
   }
 
   InsertImagePah(image:Image):Observable<ImageResponse> {
-    console.log(image);
-    return this.http.post(`http://localhost:8080/RoomBookingWeb/image`,image).map(resp=>{
+    return this.http.post(`${env.serverUrl}/RoomBookingWeb/image`,image).map(resp=>{
         const body: any = resp.json();
         return {err: null, image: body };
       }
