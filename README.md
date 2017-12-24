@@ -28,3 +28,17 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## New clone
 #npm install modules
+
+## Les Fonctionnalités de RoomBooking: 
+
+      #### Inscription d’un client
+      #### Authentification
+      #### Proposition des logements
+      #### Gérer une disponibilité
+      #### Consultation des logements
+      #### Consulter la liste des logements en effectuant une recherche
+      #### Afficher les détails d’un logement
+      #### Comparer plusieures logements
+      #### Ajouter des logements le panier
+      #### Effectuer des réservations
+      #### L'envoie des E-mails de comfirmation à la fois au Client et au Hôte
